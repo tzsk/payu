@@ -77,14 +77,14 @@ $additional_fields = [
 ];
 ```
 Some optional fields that you can have with the data:
-```
+```php
 $optional_fiels = ["udf1", "udf2", "udf3", "udf4", "udf5"];
 ``` 
 
 Now make the Payment by calling make:
 
 **Note: You have to return the Payment facade**
-```
+```php
 return Payment::make($data, function($then) {
     $then->redirectTo('payment/status/page'); # Your Status page endpoint.
     # OR...
