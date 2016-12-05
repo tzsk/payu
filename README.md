@@ -163,15 +163,11 @@ public function status() {
     ...
 }
 ```
+With that you can access the payments for that perticular order: `$order->payments`.
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
-```
 
 ## Contributing
 
