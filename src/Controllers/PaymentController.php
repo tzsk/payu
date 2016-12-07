@@ -63,7 +63,7 @@ class PaymentController extends Controller
 
         Cache::put('tzsk_payment', $payment, 5);
 
-        return redirect()->to($request->callback);//->with('tzsk_payment', $payment);
+        return redirect()->to($request->callback);
     }
 
     /**
