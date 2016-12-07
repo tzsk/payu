@@ -42,11 +42,9 @@ class ProcessPayment
             switch (strtolower($this->request->status)) {
                 case 'success':
                     return self::STATUS_COMPLETED;
-                    break;
 
                 case 'pending':
                     return self::STATUS_PENDING;
-                    break;
 
                 case 'failure':
 
