@@ -13,7 +13,7 @@ class CreatePayuPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payu_payments', function (Blueprint $table) {
+        Schema::create('payu_payments', function(Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('payable_id')->default(0);
             $table->string('payable_type')->nullable();

@@ -31,7 +31,7 @@ class PayuServiceProvider extends ServiceProvider
         /**
          * Load routes for payment.
          */
-        if (! $this->app->routesAreCached()) {
+        if (!$this->app->routesAreCached()) {
             require __DIR__.'/../Routes/routes.php';
         }
 
