@@ -4,7 +4,12 @@
     "description": "PayU India Payment Gateway Integration for Laravel 5.",
     "keywords": [
         "tzsk",
-        "payu"
+        "payu",
+        "payment",
+        "geteway",
+        "payment gateway",
+        "payu payment gateway",
+        "laravel 5 payment gateway"
     ],
     "homepage": "https://github.com/tzsk/payu",
     "license": "MIT",
