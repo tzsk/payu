@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Payu by tzsk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Payu</h1>
+      <h2 class="project-tagline">Payu India Laravel Payment Gateway Package. Payment for Payu Biz India with Laravel 5.</h2>
+      <a href="https://github.com/tzsk/payu" class="btn">View on GitHub</a>
+      <a href="https://github.com/tzsk/payu/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/tzsk/payu/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="payu-laravel-payment-gateway" class="anchor" href="#payu-laravel-payment-gateway" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PayU Laravel Payment Gateway</h1>
+
+<p><a href="https://packagist.org/packages/tzsk/payu"><img src="https://img.shields.io/packagist/v/tzsk/payu.svg?style=flat-square" alt="Latest Version on Packagist"></a>
+<a href="LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License"></a>
+<a href="https://codeclimate.com/github/tzsk/payu"><img src="https://codeclimate.com/github/tzsk/payu/badges/gpa.svg" alt="Code Climate"></a>
+<a href="https://scrutinizer-ci.com/g/tzsk/payu"><img src="https://img.shields.io/scrutinizer/g/tzsk/payu.svg?style=flat-square" alt="Quality Score"></a>
+<a href="https://packagist.org/packages/tzsk/payu"><img src="https://img.shields.io/packagist/dt/tzsk/payu.svg?style=flat-square" alt="Total Downloads"></a></p>
+
+<p>This is a Package for <code>PayU India</code> payment gateway integration with 
+<code>Laravel 5</code>. Now payment gateway made simple.</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
+<p>Via Composer</p>
+
+<div class="highlight highlight-source-shell"><pre>$ composer require tzsk/payu</pre></div>
+
+<h2>
+<a id="configure" class="anchor" href="#configure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configure</h2>
+
+<p><code>config/app.php</code></p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-s"><span class="pl-pds">'</span>providers<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c1">Tzsk\Payu\Provider\</span><span class="pl-c1">PayuServiceProvider</span><span class="pl-k">::</span><span class="pl-c1">class</span>,</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">],</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-pds">'</span>aliases<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>Payment<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">Tzsk\Payu\Facade\</span><span class="pl-c1">Payment</span><span class="pl-k">::</span><span class="pl-c1">class</span>,</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">],</span></pre></div>
+
+<p>To publish the Configuration file in <code>config/payu.php</code> Run:</p>
+
+<div class="highlight highlight-source-shell"><pre>php artisan vendor:publish</pre></div>
+
+<p>Migrate the <code>PayuPayment</code> Database table that comes with the package.</p>
+
+<div class="highlight highlight-source-shell"><pre>php artisan migrate</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>At the top of your controller file:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">...</span></span>
+<span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Tzsk\Payu\Facade\Payment</span>;</span>
+<span class="pl-s1"><span class="pl-k">...</span></span></pre></div>
+
+<p>Inside your controller method you have to pass the Payment data in Payment make function.</p>
+
+<p><strong>For Example:</strong></p>
+
+<p>Minimum required fields:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$data</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>txnid<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">strtoupper</span>(str_random(<span class="pl-c1">8</span>)), <span class="pl-c"># Transaction ID.</span></span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>amount<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">rand</span>(<span class="pl-c1">100</span>, <span class="pl-c1">999</span>), <span class="pl-c"># Amount to be charged.</span></span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>productinfo<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>Product Information<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>firstname<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>John<span class="pl-pds">"</span></span>, <span class="pl-c"># Payee Name.</span></span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>john@doe.com<span class="pl-pds">"</span></span>, <span class="pl-c"># Payee Email Address.</span></span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>phone<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>9876543210<span class="pl-pds">"</span></span>, <span class="pl-c"># Payee Phone Number.</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">...</span> <span class="pl-c"># Additional Fields With Data.</span></span>
+<span class="pl-s1">    <span class="pl-k">...</span> <span class="pl-c"># Optional Fields With Data.</span></span>
+<span class="pl-s1">];</span></pre></div>
+
+<p>Some additional fields that you can have with the data:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$additional_fields</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>lastname<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>address1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>address2<span class="pl-pds">"</span></span>, </span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">"</span>city<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>state<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>country<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>zipcode<span class="pl-pds">"</span></span></span>
+<span class="pl-s1">];</span></pre></div>
+
+<p>Some optional fields that you can have with the data:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$optional_fiels</span> <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">"</span>udf1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>udf2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>udf3<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>udf4<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>udf5<span class="pl-pds">"</span></span>];</span></pre></div>
+
+<p>Now make the Payment by calling make:</p>
+
+<p><strong>Note: You have to return the Payment facade</strong></p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">return</span> <span class="pl-c1">Payment</span><span class="pl-k">::</span>make(<span class="pl-smi">$data</span>, <span class="pl-k">function</span>(<span class="pl-smi">$then</span>) {</span>
+<span class="pl-s1">    <span class="pl-smi">$then</span><span class="pl-k">-&gt;</span>redirectTo(<span class="pl-s"><span class="pl-pds">'</span>payment/status/page<span class="pl-pds">'</span></span>); <span class="pl-c"># Your Status page endpoint.</span></span>
+<span class="pl-s1">    <span class="pl-c"># OR...</span></span>
+<span class="pl-s1">    <span class="pl-smi">$then</span><span class="pl-k">-&gt;</span>redirectAction(<span class="pl-s"><span class="pl-pds">'</span>PaymentController@status<span class="pl-pds">'</span></span>); <span class="pl-c"># Your Status action.</span></span>
+<span class="pl-s1">    <span class="pl-c"># OR...</span></span>
+<span class="pl-s1">    <span class="pl-smi">$then</span><span class="pl-k">-&gt;</span>redirectRoute(<span class="pl-s"><span class="pl-pds">'</span>payment_status<span class="pl-pds">'</span></span>); <span class="pl-c"># Your Status Route.</span></span>
+<span class="pl-s1">});</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">/**</span></span>
+<span class="pl-s1"><span class="pl-c">* So here you will need another route to redirect to after payment is done.</span></span>
+<span class="pl-s1"><span class="pl-c">*/</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Now, in that status route that you have created will receive a Payment 
+instance of the Migration table.</p>
+
+<p><strong>For Example:</strong></p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">status</span>() {</span>
+<span class="pl-s1">    <span class="pl-smi">$payment</span> <span class="pl-k">=</span> <span class="pl-c1">Payment</span><span class="pl-k">::</span>capture(); <span class="pl-c"># Recieve the payment.</span></span>
+<span class="pl-s1">    <span class="pl-c"># Returns PayuPayment Instance.</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">}</span></pre></div>
+
+<p><strong>PayuPayment API:</strong></p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span>getData(); <span class="pl-c"># Get the full response from Gateway.</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span>isCaptured(); <span class="pl-c"># Is the payment captured or some internal failure occured.</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span><span class="pl-smi">transaction_id</span>; <span class="pl-c"># Your Local Transaction ID.</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span><span class="pl-smi">payment_id</span>; <span class="pl-c"># PayU Payment ID.</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span><span class="pl-smi">total_amount</span>; <span class="pl-c"># Get Tototal Amount Deducted.</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span><span class="pl-smi">bank_reference_number</span>; <span class="pl-c"># Issued Bank Refernce Number.</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span><span class="pl-smi">bank_code</span>; <span class="pl-c"># Issued Bank Code.</span></span>
+<span class="pl-s1"><span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span><span class="pl-smi">card_number</span>; <span class="pl-c"># Redacted Card Number. If paid through Card.</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">...</span></span>
+<span class="pl-s1"><span class="pl-c"># And many more like 'status', 'mode' are found in the Database Table.</span></span></pre></div>
+
+<p>This Package already comes with Polymorphic Relation built in.
+Let's asume you want to have it related to an Order. Then you should have
+an Order Model. Just use the Trait like.</p>
+
+<p><strong>Model: <code>Order.php</code></strong></p>
+
+<p>At the top.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Tzsk\Payu\Fragment\Payable</span>;</span></pre></div>
+
+<p>Inside the Model Class:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">Order</span> <span class="pl-k">extends</span> <span class="pl-e">Model</span> {</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">use</span> <span class="pl-c1">Payable</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">}</span></pre></div>
+
+<p>If you plan to use relationship then you have to modify your status route steps a bit.</p>
+
+<p><strong>Polymorphic Status Example:</strong></p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">status</span>() {</span>
+<span class="pl-s1">    <span class="pl-smi">$payment</span> <span class="pl-k">=</span> <span class="pl-c1">Payment</span><span class="pl-k">::</span>capture(); <span class="pl-c"># Recieve the payment.</span></span>
+<span class="pl-s1">    <span class="pl-smi">$payment</span><span class="pl-k">-&gt;</span>fill([</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>payable_id<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-smi">$order</span><span class="pl-k">-&gt;</span><span class="pl-smi">id</span>, <span class="pl-c"># Your Order Table Primary Key.</span></span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>payable_type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>App\Order<span class="pl-pds">'</span></span>, <span class="pl-c"># Your Order Model Namespace.</span></span>
+<span class="pl-s1">    ])<span class="pl-k">-&gt;</span>save();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">}</span></pre></div>
+
+<p>With that you can access the payments for that perticular order: <code>$order-&gt;payments</code>.</p>
+
+<h2>
+<a id="change-log" class="anchor" href="#change-log" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Change log</h2>
+
+<p>Please see <a href="CHANGELOG.md">CHANGELOG</a> for more information what has changed recently.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Please see <a href="CONTRIBUTING.md">CONTRIBUTING</a> and <a href="CONDUCT.md">CONDUCT</a> for details.</p>
+
+<h2>
+<a id="security" class="anchor" href="#security" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Security</h2>
+
+<p>If you discover any security related issues, please email <a href="mailto:mailtokmahmed@gmail.com">mailtokmahmed@gmail.com</a> instead of using the issue tracker.</p>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li><a href="https://github.com/tzsk">Kazi Mainuddin Ahmed</a></li>
+<li><a href="../../contributors">All Contributors</a></li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>The MIT License (MIT). Please see <a href="LICENSE.md">License File</a> for more information.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/tzsk/payu">Payu</a> is maintained by <a href="https://github.com/tzsk">tzsk</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
