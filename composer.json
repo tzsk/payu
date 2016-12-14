@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "tzsk\\payu\\": "src"
+            "Tzsk\\Payu\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "tzsk\\payu\\": "tests"
+            "Tzsk\\Payu\\": "tests"
         }
     },
     "scripts": {
