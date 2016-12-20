@@ -24,8 +24,10 @@ class PayuGateway
     public function make(array $data, $callback)
     {
         call_user_func($callback, $this);
+        Cache::put('tzsk_data', $data, 5);
+        Cache::put('tzsk_status_url', $this->url, 5);
 
-        return redirect()->to('tzsk/payment')->with('data', $data)->with('status_url', $this->url);
+        return redirect()->to('tzsk/payment');
     }
 
     /**

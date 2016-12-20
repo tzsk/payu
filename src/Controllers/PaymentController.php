@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Tzsk\Payu\Model\PayuPayment;
 use Tzsk\Payu\ProcessPayment;
+use Illuminate\Support\Facades\Cache;
 
 class PaymentController extends Controller
 {
@@ -19,12 +20,16 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $request->replace(session('data'));
+        $data = Cache::get('tzsk_data');
+        $status_url = Cache::get('tzsk_status_url');
+
+        $request->replace($data);
         $validation = $this->validateRequest($request);
         $hash = $this->getHashChecksum($request);
 
-        $redirect = collect(config('payu.redirect'))->map(function($value) use ($request) {
-            return url($value.'?callback='.session('status_url'));
+        $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
+            $seperator = str_contains($value, '?') ? '&' : '?';
+            return url($value . $seperator . 'callback=' . $status_url);
         })->all();
 
         $form_fields = array_merge(['key' => config('payu.key'), 'hash' => $hash],

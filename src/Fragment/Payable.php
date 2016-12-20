@@ -15,4 +15,5 @@ trait Payable
     {
         return $this->morphMany(PayuPayment::class, 'payable');
     }
+    
 }
