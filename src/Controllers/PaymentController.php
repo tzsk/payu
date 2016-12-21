@@ -28,7 +28,7 @@ class PaymentController extends Controller
 
         $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
             $seperator = str_contains($value, '?') ? '&' : '?';
-            return url($value . $seperator . 'callback=' . $status_url);
+            return url($value.$seperator.'callback='.$status_url);
         })->all();
 
         $form_fields = array_merge(['key' => config('payu.key'), 'hash' => $hash],
