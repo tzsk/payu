@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Tzsk\Payu\Model\PayuPayment;
 use Tzsk\Payu\ProcessPayment;
-use Illuminate\Support\Facades\Cache;
 
 class PaymentController extends Controller
 {
