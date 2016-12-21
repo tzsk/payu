@@ -19,25 +19,7 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Cache::get('tzsk_data');
-        $status_url = Cache::get('tzsk_status_url');
-
-        $request->replace($data);
-        $validation = $this->validateRequest($request);
-        $hash = $this->getHashChecksum($request);
-
-        $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
-            $seperator = str_contains($value, '?') ? '&' : '?';
-            return url($value.$seperator.'callback='.$status_url);
-        })->all();
-
-        $form_fields = array_merge(['key' => config('payu.key'), 'hash' => $hash],
-            array_merge($redirect, $validation));
-
-        $prefix = (config('payu.env') == 'secure') ? 'secure' : 'test';
-        $url = "https://{$prefix}.".config('payu.endpoint');
-
-        $payment = (object) ['fields' => $form_fields, 'url' => $url];
+        $payment = $this->getPaymentFormInformation($request);
 
         return view('tzsk::payment_form', compact('payment'));
     }
@@ -71,6 +53,35 @@ class PaymentController extends Controller
     }
 
     /**
+     * @param  Request $request
+     * @return object
+     */
+    protected  function getPaymentFormInformation(Request $request)
+    {
+        $data = Cache::get('tzsk_data');
+        $status_url = Cache::get('tzsk_status_url');
+
+        $request->replace($data);
+        $validation = $this->validateRequest($request);
+        $hash = $this->getHashChecksum($request);
+
+        $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
+            $seperator = str_contains($value, '?') ? '&' : '?';
+            return url($value.$seperator.'callback='.$status_url);
+        })->all();
+
+        $form_fields = array_merge(['key' => config('payu.key'), 'hash' => $hash],
+            array_merge($redirect, $validation));
+
+        $prefix = (config('payu.env') == 'secure') ? 'secure' : 'test';
+        $url = "https://{$prefix}.".config('payu.endpoint');
+
+        $payment = (object) ['fields' => $form_fields, 'url' => $url];
+
+        return $payment;
+    }
+
+    /**
      * @param Request $request
      * @return string
      */
@@ -96,6 +107,23 @@ class PaymentController extends Controller
      */
     protected function validateRequest(Request $request)
     {
+        lists($validation, $data) = $this->getValidationData($request);
+
+        $validator = Validator::make($request->all(), $validation);
+
+        if ($validator->fails()) {
+            throw new \InvalidArgumentException($validator->errors()->first());
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param  Request $request
+     * @return array
+     */
+    protected function getValidationData(Request $request)
+    {
         $validation = [];
         $data = [];
         foreach (config('payu.required_fields') as $item) {
@@ -111,13 +139,7 @@ class PaymentController extends Controller
             $request->has($item) ? $data[$item] = $request->get($item) : null;
         }
 
-        $validator = Validator::make($request->all(), $validation);
-
-        if ($validator->fails()) {
-            throw new \InvalidArgumentException($validator->errors()->first());
-        }
-
-        return $data;
+        return compact($validation, $data);
     }
 
 }
