@@ -20,6 +20,7 @@ class CreatePayuPaymentsTable extends Migration
             $table->string('txnid');
             $table->string('mihpayid');
             $table->string('firstname');
+            $table->string('lastname');
             $table->string('email');
             $table->string('phone');
             $table->double('amount');
