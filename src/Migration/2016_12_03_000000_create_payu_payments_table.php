@@ -29,12 +29,12 @@ class CreatePayuPaymentsTable extends Migration
             $table->string('status');
             $table->string('unmappedstatus');
             $table->string('mode');
-            $table->string('bank_ref_num');
-            $table->string('bankcode');
-            $table->string('cardnum');
-            $table->string('name_on_card');
-            $table->string('issuing_bank');
-            $table->string('card_type');
+            $table->string('bank_ref_num')->nullable();
+            $table->string('bankcode')->nullable();
+            $table->string('cardnum')->nullable();
+            $table->string('name_on_card')->nullable();
+            $table->string('issuing_bank')->nullable();
+            $table->string('card_type')->nullable();
             $table->timestamps();
         });
     }
