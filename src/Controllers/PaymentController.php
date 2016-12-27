@@ -107,7 +107,7 @@ class PaymentController extends Controller
      */
     protected function validateRequest(Request $request)
     {
-        lists($validation, $data) = $this->getValidationData($request);
+        list($validation, $data) = $this->getValidationData($request);
 
         $validator = Validator::make($request->all(), $validation);
 

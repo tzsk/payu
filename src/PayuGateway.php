@@ -47,6 +47,20 @@ class PayuGateway
     }
 
     /**
+     * Get Status of a given Transaction.
+     *
+     * @param $txn_id
+     * @return object
+     */
+    public function verify($txn_id)
+    {
+        $txn_id = is_array($txn_id) ? $txn_id : [$txn_id];
+        $verification = new PaymentVerification($txn_id);
+
+        return $verification->request();
+    }
+
+    /**
      * Set Redirect URL.
      *
      * @param $url
