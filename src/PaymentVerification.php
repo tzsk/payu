@@ -88,7 +88,7 @@ class PaymentVerification
      */
     public function simple()
     {
-        return $this->getSimpleResponseData();
+        return $this->getResponse(true);
     }
 
     /**
@@ -98,6 +98,25 @@ class PaymentVerification
      */
     public function full()
     {
+        return $this->getResponse(false);
+    }
+
+    /**
+     * Get Response according to Simple or Full.
+     *
+     * @param $simple
+     * @return array
+     */
+    protected function getResponse($simple)
+    {
+        if (empty($this->response['status'])) {
+            return ['status' => false, 'message' => $this->response['msg']];
+        }
+
+        if ($simple) {
+            return $this->getSimpleResponseData();
+        }
+
         return $this->getFullResponseData();
     }
 
@@ -175,19 +194,12 @@ class PaymentVerification
      */
     protected function getFullResponseData()
     {
-        if (empty($this->response['status'])) {
-            return ['status' => false, 'message' => $this->response['msg']];
-        }
-
         $data = ['status' => true, 'data' => []];
         foreach ($this->txn_id as $item) {
             $status = ($this->response['transaction_details'][$item]['status'] == 'success') ?
                 ProcessPayment::STATUS_COMPLETED : ProcessPayment::STATUS_FAILED;
 
-            $message = @$this->response['transaction_details'][$item]['error_Message'];
-            if (count($this->response['transaction_details'][$item]) < 3) {
-                $message = 'Transaction ID not found.';
-            }
+            $message = $this->getResponseMessage($item);
 
             $data['data'][$item] = ['status' => $status, 'message' => $message,
                 'response' => $this->response['transaction_details'][$item]];
@@ -203,23 +215,32 @@ class PaymentVerification
      */
     protected function getSimpleResponseData()
     {
-        if (empty($this->response['status'])) {
-            return ['status' => false, 'message' => $this->response['msg']];
-        }
-
         $data = ['status' => true, 'data' => []];
         foreach ($this->txn_id as $item) {
             $status = ($this->response['transaction_details'][$item]['status'] == 'success') ? true : false;
 
-            $message = @$this->response['transaction_details'][$item]['error_Message'];
-            if (count($this->response['transaction_details'][$item]) < 3) {
-                $message = 'Transaction ID not found.';
-            }
+            $message = $this->getResponseMessage($item);
 
             $data['data'][$item] = ['status' => $status, 'message' => $message];
         }
 
         return $data;
+    }
+
+    /**
+     * Get Response Message.
+     *
+     * @param $item
+     * @return string
+     */
+    protected function getResponseMessage($item)
+    {
+        $message = @$this->response['transaction_details'][$item]['error_Message'];
+        if (count($this->response['transaction_details'][$item]) < 3) {
+            $message = 'Transaction ID not found.';
+        }
+
+        return $message;
     }
 
 }
