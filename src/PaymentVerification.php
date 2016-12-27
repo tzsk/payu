@@ -140,7 +140,7 @@ class PaymentVerification
         }
         curl_close($curl);
 
-        $this->response = json_decode($output, 1);
+        $this->response = json_decode($output, true);
     }
 
     /**
