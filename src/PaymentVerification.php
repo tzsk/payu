@@ -104,7 +104,7 @@ class PaymentVerification
     /**
      * Get Response according to Simple or Full.
      *
-     * @param $simple
+     * @param boolean $simple
      * @return array
      */
     protected function getResponse($simple)
@@ -128,9 +128,9 @@ class PaymentVerification
     public function getVerificationPostFields()
     {
         $txn_string = implode("|", $this->txn_id);
-        $hash_str = $this->key  . '|' . $this->command . '|' . $txn_string . '|' . $this->salt ;
+        $hash_str = $this->key.'|'.$this->command.'|'.$txn_string.'|'.$this->salt;
         $hash = strtolower(hash('sha512', $hash_str));
-        $params = ['key' => $this->key , 'hash' => $hash , 'var1' => $txn_string, 'command' => $this->command];
+        $params = ['key' => $this->key, 'hash' => $hash, 'var1' => $txn_string, 'command' => $this->command];
 
         return http_build_query($params);
     }
@@ -154,7 +154,7 @@ class PaymentVerification
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
         $output = curl_exec($curl);
 
-        if(curl_errno($curl)) {
+        if (curl_errno($curl)) {
             throw new \Exception(curl_error($curl));
         }
         curl_close($curl);
