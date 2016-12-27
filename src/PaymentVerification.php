@@ -35,6 +35,13 @@ class PaymentVerification
     protected $url = null;
 
     /**
+     * Transaction ID.
+     *
+     * @var array
+     */
+    protected $txn_id = [];
+
+    /**
      * Original Response.
      *
      * @var array
@@ -169,7 +176,7 @@ class PaymentVerification
     protected function getFullResponseData()
     {
         if (empty($this->response['status'])) {
-            return $this->full_response = ['status' => false, 'message' => $this->response['msg']];
+            return ['status' => false, 'message' => $this->response['msg']];
         }
 
         $data = ['status' => true, 'data' => []];
