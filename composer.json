@@ -7,10 +7,13 @@
         "payu",
         "payment",
         "geteway",
+        "verification",
         "laravel payu",
         "payment gateway",
         "payu payment gateway",
-        "laravel 5 payment gateway"
+        "laravel 5 payment gateway",
+        "payu gateway with verification",
+        "payu payment verification laravel"
     ],
     "homepage": "https://github.com/tzsk/payu",
     "license": "MIT",
