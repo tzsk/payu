@@ -21,6 +21,7 @@ $ composer require tzsk/payu
 ## Configure
 
 ` config/app.php `
+
 ```php
 'providers' => [
     ...
