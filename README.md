@@ -183,7 +183,7 @@ $response = Payment::verify("Transaction ID")->simple();
 # OR..
 $response = Payment::verify(["Array of Transaction IDs"])->simple();
 
-# 'simple()' stands for Simple Response. You can use 'full()' instad.
+# 'simple()' stands for Simple Response. You can use 'full()' instead.
 
 $response = Payment::verify(...)->full();
 ```
