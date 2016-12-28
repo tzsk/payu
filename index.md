@@ -10,6 +10,7 @@ This is a Package for `PayU India` payment gateway integration with
 `Laravel 5.2 or Higher`. Now payment gateway made simple.
 
 Older Version Support (5.1.\*) is Coming Soon for those who are still using PHP 5.4.\*
+
 ## Install
 
 Via Composer
