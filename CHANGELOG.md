@@ -5,13 +5,13 @@ All Notable changes to `payu` will be documented in this file.
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
 ### Added
-- Nothing
+- Payment Verify Functionality
 
 ### Deprecated
 - Nothing
 
 ### Fixed
-- Nothing
+- Bugs about Callback URL
 
 ### Removed
 - Nothing
