@@ -1,7 +1,7 @@
 # PayU Laravel Payment Gateway
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
+[![Software License][ico-license]](https://github.com/tzsk/payu/blob/master/LICENSE.md)
 [![Code Climate](https://codeclimate.com/github/tzsk/payu/badges/gpa.svg)](https://codeclimate.com/github/tzsk/payu)
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -36,17 +36,20 @@ $ composer require tzsk/payu
 ```
 
 To publish the Configuration file in `config/payu.php` Run:
+
 ```bash
 php artisan vendor:publish
 ```
 
 Migrate the `PayuPayment` Database table that comes with the package.
+
 ```bash
 php artisan migrate
 ```
 
 ## Usage
 At the top of your controller file:
+
 ```php
 ...
 use Tzsk\Payu\Facade\Payment;
@@ -58,6 +61,7 @@ Inside your controller method you have to pass the Payment data in Payment make 
 **For Example:**
 
 Minimum required fields:
+
 ``` php
 $data = [
     'txnid' => strtoupper(str_random(8)), # Transaction ID.
@@ -71,14 +75,18 @@ $data = [
     ... # Optional Fields With Data.
 ];
 ```
+
 Some additional fields that you can have with the data:
+
 ```php
 $additional_fields = [
     "lastname", "address1", "address2", 
     "city", "state", "country", "zipcode"
 ];
 ```
+
 Some optional fields that you can have with the data:
+
 ```php
 $optional_fiels = ["udf1", "udf2", "udf3", "udf4", "udf5"];
 ``` 
@@ -86,6 +94,7 @@ $optional_fiels = ["udf1", "udf2", "udf3", "udf4", "udf5"];
 Now make the Payment by calling make:
 
 **Note: You have to return the Payment facade**
+
 ```php
 return Payment::make($data, function($then) {
     $then->redirectTo('payment/status/page'); # Your Status page endpoint.
@@ -105,6 +114,7 @@ Now, in that status route that you have created will receive a Payment
 instance of the Migration table.
 
 **For Example:**
+
 ```php
 public function status() {
     $payment = Payment::capture(); # Recieve the payment.
@@ -115,6 +125,7 @@ public function status() {
 ```
 
 **PayuPayment API:**
+
 ```php
 $payment->getData(); # Get the full response from Gateway.
 $payment->isCaptured(); # Is the payment captured or some internal failure occured.
@@ -136,11 +147,13 @@ an Order Model. Just use the Trait like.
 **Model: `Order.php`**
 
 At the top.
+
 ```php
 use Tzsk\Payu\Fragment\Payable;
 ```
 
 Inside the Model Class:
+
 ```php
 class Order extends Model {
 
@@ -154,6 +167,7 @@ class Order extends Model {
 If you plan to use relationship then you have to modify your status route steps a bit.
 
 **Polymorphic Status Example:**
+
 ```php
 public function status() {
     $payment = Payment::capture(); # Recieve the payment.
@@ -165,6 +179,7 @@ public function status() {
     ...
 }
 ```
+
 With that you can access the payments for that perticular order: `$order->payments`.
 
 You can perform general Query like : `$order->payments()->where(...)`
@@ -192,11 +207,11 @@ With the help of the response you can properly update your order status accordin
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](https://github.com/tzsk/payu/blob/master/CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
+Please see [CONTRIBUTING](https://github.com/tzsk/payu/blob/master/CONTRIBUTING.md) and [CONDUCT](https://github.com/tzsk/payu/blob/master/CONDUCT.md) for details.
 
 ## Security
 
@@ -209,7 +224,7 @@ If you discover any security related issues, please email mailtokmahmed@gmail.co
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/tzsk/payu/blob/master/LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/tzsk/payu.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
@@ -224,4 +239,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-code-quality]: https://scrutinizer-ci.com/g/tzsk/payu
 [link-downloads]: https://packagist.org/packages/tzsk/payu
 [link-author]: https://github.com/tzsk
-[link-contributors]: ../../contributors
+[link-contributors]: https://github.com/tzsk/payu/graphs/contributors
