@@ -7,7 +7,9 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 
 This is a Package for `PayU India` payment gateway integration with 
-`Laravel 5`. Now payment gateway made simple.
+`Laravel 5.2 or Higher`. Now payment gateway made simple.
+
+Older Version Support (5.1.\*) is Coming Soon for those who are still using PHP 5.4.\*
 ## Install
 
 Via Composer
@@ -164,6 +166,29 @@ public function status() {
 }
 ```
 With that you can access the payments for that perticular order: `$order->payments`.
+
+You can perform general Query like : `$order->payments()->where(...)`
+
+**Payment Verify:**
+
+If in case the Amount is deducted from the payee's account but for some reason
+it did not redirect back to your Callback URL. In those cases you might like to
+Check if a payment is really done or not. In that case you might want to update
+your database that the payment was successful.
+
+I recommend that you save your Transaction ID with the ORDER.
+
+```php
+$response = Payment::verify("Transaction ID")->simple();
+# OR..
+$response = Payment::verify(["Array of Transaction IDs"])->simple();
+
+# 'simple()' stands for Simple Response. You can use 'full()' instad.
+
+$response = Payment::verify(...)->full();
+```
+
+With the help of the response you can properly update your order status accordingly.
 
 ## Change log
 
