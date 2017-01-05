@@ -125,6 +125,15 @@ $payment->bank_reference_number; # Issued Bank Refernce Number.
 $payment->bank_code; # Issued Bank Code.
 $payment->card_number; # Redacted Card Number. If paid through Card.
 
+# New Feature:
+$payment->get('Attribute'); # Attribute is anything inside the Post Data.
+
+# Example-
+$payment->get('udf5');
+# OR
+$payment->get('zipcode');
+# See more in $payment->getData();
+
 ...
 # And many more like 'status', 'mode' are found in the Database Table.
 ```
