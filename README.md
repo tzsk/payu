@@ -93,7 +93,7 @@ return Payment::make($data, function($then) {
     $then->redirectAction('PaymentController@status'); # Your Status action.
     # OR...
     $then->redirectRoute('payment_status'); # Your Status Route.
-});
+}); 
     
 /**
 * So here you will need another route to redirect to after payment is done.
@@ -165,9 +165,23 @@ public function status() {
     ...
 }
 ```
-With that you can access the payments for that perticular order: `$order->payments`.
+With that you can access the payments for that particular order: `$order->payments`.
 
 You can perform general Query like : `$order->payments()->where(...)`
+
+**New Polymorphic Relation Directly from Payment:**
+
+```php
+return Payment::with($order)->make($data, function ($then) {
+    ...
+});
+```
+
+This way you don\'t have to write the `$payment->fill(...)->save()`. It will bind to it automatically.
+
+**Note:** This does not work with `session` driver.
+
+
 
 **Payment Verify:**
 
