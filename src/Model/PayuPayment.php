@@ -57,6 +57,19 @@ class PayuPayment extends Model
     }
 
     /**
+     * Get from Data Attribute.
+     *
+     * @param $item
+     * @return null|mixed
+     */
+    public function get($item)
+    {
+       $data = $this->getData();
+
+       return empty($data->$item) ? null : $data->$item;
+    }
+
+    /**
      * Get Original Payment Data.
      *
      * @return array

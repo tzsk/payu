@@ -41,8 +41,20 @@ class PaymentController extends Controller
         $process = new ProcessPayment($request);
         $attributes['status'] = $process->getStatus();
 
+        $model = Cache::get('tzsk_model');
+
         if (config('payu.driver') == 'database') {
-            $payment = PayuPayment::create($attributes)->id;
+            $payment_instance = PayuPayment::create($attributes);
+
+            if (!empty($model)) {
+                $payment_instance->fill([
+                    'payable_id' => $model->id,
+                    'payable_type' => get_class($model)
+                ])->save();
+            }
+
+            $payment = $payment_instance->id;
+
         } else {
             $payment = $attributes;
         }
@@ -55,11 +67,16 @@ class PaymentController extends Controller
     /**
      * @param  Request $request
      * @return object
+     * @throws \Exception
      */
     protected  function getPaymentFormInformation(Request $request)
     {
         $data = Cache::get('tzsk_data');
         $status_url = Cache::get('tzsk_status_url');
+
+        if (empty($status_url)) {
+            throw new \Exception("There is no Redirect URL specified.");
+        }
 
         $request->replace($data);
         $validation = $this->validateRequest($request);
@@ -139,7 +156,7 @@ class PaymentController extends Controller
             $request->has($item) ? $data[$item] = $request->get($item) : null;
         }
 
-        return compact($validation, $data);
+        return [$validation, $data];
     }
 
 }

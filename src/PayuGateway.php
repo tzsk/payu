@@ -13,7 +13,27 @@ class PayuGateway
      *
      * @var
      */
-    protected $url;
+    protected $url = null;
+
+    /**
+     * Model to add;
+     *
+     * @var null
+     */
+    protected $model = null;
+
+    /**
+     * Pass any model to Add Polymorphic Relation.
+     *
+     * @param $model
+     * @return $this
+     */
+    public function with($model)
+    {
+        $this->model = $model;
+
+        return $this;
+    }
 
     /**
      *
@@ -26,6 +46,7 @@ class PayuGateway
         call_user_func($callback, $this);
         Cache::put('tzsk_data', $data, 5);
         Cache::put('tzsk_status_url', $this->url, 5);
+        Cache::put('tzsk_model', $this->model, 15);
 
         return redirect()->to('tzsk/payment');
     }
