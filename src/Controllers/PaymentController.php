@@ -41,25 +41,7 @@ class PaymentController extends Controller
         $process = new ProcessPayment($request);
         $attributes['status'] = $process->getStatus();
 
-        $model = Cache::get('tzsk_model');
-
-        if (config('payu.driver') == 'database') {
-            $payment_instance = PayuPayment::create($attributes);
-
-            if (!empty($model)) {
-                $payment_instance->fill([
-                    'payable_id' => $model->id,
-                    'payable_type' => get_class($model)
-                ])->save();
-            }
-
-            $payment = $payment_instance->id;
-
-        } else {
-            $payment = $attributes;
-        }
-
-        Cache::put('tzsk_payment', $payment, 5);
+        $this->generatePaymentObject($attributes);
 
         return redirect()->to(base64_decode($request->callback));
     }
@@ -157,6 +139,34 @@ class PaymentController extends Controller
         }
 
         return [$validation, $data];
+    }
+
+    /**
+     * Generate the payment model Object for use.
+     *
+     * @param $attributes
+     */
+    protected function generatePaymentObject($attributes)
+    {
+        $model = Cache::get('tzsk_model');
+
+        if (config('payu.driver') == 'database') {
+            $payment_instance = PayuPayment::create($attributes);
+
+            if (!empty($model)) {
+                $payment_instance->fill([
+                    'payable_id' => $model->id,
+                    'payable_type' => get_class($model)
+                ])->save();
+            }
+
+            $payment = $payment_instance->id;
+
+        } else {
+            $payment = $attributes;
+        }
+
+        Cache::put('tzsk_payment', $payment, 5);
     }
 
 }
