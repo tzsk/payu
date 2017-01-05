@@ -64,9 +64,9 @@ class PayuPayment extends Model
      */
     public function get($item)
     {
-       $data = $this->getData();
+        $data = $this->getData();
 
-       return empty($data->$item) ? null : $data->$item;
+        return empty($data->$item) ? null : $data->$item;
     }
 
     /**
