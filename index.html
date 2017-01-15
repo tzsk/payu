@@ -3,6 +3,7 @@
 
 <head>
 
+    <meta name="google-site-verification" content="d8qfxcRdqipXlrepmqR4F1Gft528Ezd6Wb54rnbVFuQ" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -27,7 +28,7 @@
     <title>Payu India Payment Gateway for Laravel 5.2 and above</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Payu India Payment Gateway Integration Kit/Package for Laravel"/>
-	<meta name="keywords" content="payu,laravel payu, payment gateway, laravel payment, laravel payment gateway, laravel payu payment gateway"/>
+	<meta name="keywords" content="payu,laravel payu, verification, payment gateway, laravel payment, laravel payment gateway, laravel payu payment gateway,payu payment verification"/>
 	<meta property="og:title" content="Payu India Payment Gateway for Laravel 5.2 and above"/>
 	<meta property="og:description" content="Payu India Payment Gateway Integration Kit/Package for Laravel"/>
 	<meta property="og:image" content="https://tzsk.github.io/payu/img/bg-cta.jpg"/>
@@ -381,6 +382,24 @@ return Payment::with($order)->make(function ($then) {
 </code></pre>
 <br>
 <p>That's simpley it. Simple isn't it?</p>
+
+<h3>Payment Verify:</h3>
+<p>
+    Cool thing is, you can also verify if a payment is really made or not. If in any case the amount is deducted from the buyer's account
+    but due to network issue it didn't redirect back to your Callback URL. You should check if the Transaction is complete or not.<br><br>
+    I recommend you save your Transaction ID (txnid) with your Order or Subscription (Payable Model) etc.
+</p>
+
+<pre><code class="language-php">
+$response = Payment::verify("Transaction ID")->simple();
+# OR..
+$response = Payment::verify(["Array of Transaction IDs"])->simple();
+
+# 'simple()' stands for Simple Response. You can use 'full()' instead.
+# Ex.
+$response = Payment::verify(...)->full();
+
+</code></pre>
 
                 </div>
             </div>
