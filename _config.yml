@@ -1,8 +1,0 @@
-title: Payu
-description: Payu India Laravel Payment Gateway Package. Payment for Payu Biz India with Laravel 5.
-google_analytics: 
-show_downloads: true
-theme: jekyll-theme-cayman
-
-gems:
-  - jekyll-mentions
