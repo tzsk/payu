@@ -76,7 +76,9 @@ class PaymentVerification
     {
         $this->sendRequest();
 
-        $this->updatePayuTransaction();
+        if (config('payu.driver') != 'database') {
+            $this->updatePayuTransaction();
+        }
 
         return $this;
     }
@@ -169,18 +171,10 @@ class PaymentVerification
      */
     protected function updatePayuTransaction()
     {
-        if (config('payu.driver') != 'database') {
-            return false;
-        }
-
         foreach ($this->txn_id as $item) {
             $payu_payment = PayuPayment::where('txnid', $item)->first();
             if ($payu_payment) {
-                $attributes = $this->response['transaction_details'][$item];
-                $attributes['status'] = ($this->response['transaction_details'][$item]['status'] == 'success') ?
-                    ProcessPayment::STATUS_COMPLETED : ProcessPayment::STATUS_FAILED;
-
-                $payu_payment->fill($attributes)->save();
+                $payu_payment->fill($this->getPayuPaymentAttributes($item))->save();
             }
         }
 
@@ -241,6 +235,19 @@ class PaymentVerification
         }
 
         return $message;
+    }
+
+    /**
+     * @param $item
+     * @return mixed
+     */
+    protected function getPayuPaymentAttributes($item)
+    {
+        $attributes = $this->response['transaction_details'][$item];
+        $attributes['status'] = ($this->response['transaction_details'][$item]['status'] == 'success') ?
+            ProcessPayment::STATUS_COMPLETED : ProcessPayment::STATUS_FAILED;
+
+        return $attributes;
     }
 
 }
