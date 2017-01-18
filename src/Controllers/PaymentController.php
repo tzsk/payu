@@ -53,24 +53,7 @@ class PaymentController extends Controller
      */
     protected  function getPaymentFormInformation(Request $request)
     {
-        $data = Cache::get('tzsk_data');
-        $status_url = Cache::get('tzsk_status_url');
-
-        if (empty($status_url)) {
-            throw new \Exception("There is no Redirect URL specified.");
-        }
-
-        $request->replace($data);
-        $validation = $this->validateRequest($request);
-        $hash = $this->getHashChecksum($request);
-
-        $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
-            $seperator = str_contains($value, '?') ? '&' : '?';
-            return url($value.$seperator.'callback='.urlencode(base64_encode($status_url)));
-        })->all();
-
-        $form_fields = array_merge(['key' => config('payu.key'), 'hash' => $hash],
-            array_merge($redirect, $validation));
+        $form_fields = $this->getFormFields($request);
 
         $prefix = (config('payu.env') == 'secure') ? 'secure' : 'test';
         $url = "https://{$prefix}.".config('payu.endpoint');
@@ -123,20 +106,11 @@ class PaymentController extends Controller
      */
     protected function getValidationData(Request $request)
     {
-        $validation = [];
-        $data = [];
-        foreach (config('payu.required_fields') as $item) {
-            $validation[$item] = 'required';
-            $request->has($item) ? $data[$item] = $request->get($item) : null;
-        }
+        $validation = collect(array_flip(config('payu.required_fields')))->map(function($value) {
+            return 'required';
+        });
 
-        foreach (config('payu.optional_fields') as $item) {
-            $request->has($item) ? $data[$item] = $request->get($item) : null;
-        }
-
-        foreach (config('payu.additional_fields') as $item) {
-            $request->has($item) ? $data[$item] = $request->get($item) : null;
-        }
+        $data = $this->getFormDataArray($request);
 
         return [$validation, $data];
     }
@@ -167,6 +141,66 @@ class PaymentController extends Controller
         }
 
         Cache::put('tzsk_payment', $payment, 5);
+    }
+
+    /**
+     * Get the form data array.
+     *
+     * @param Request $request
+     * @return array
+     */
+    private function getFormDataArray(Request $request)
+    {
+        $data = [];
+        $items = collect(config('payu.required_fields'))->merge(config('payu.optional_fields'))
+            ->merge(config('payu.additional_fields'));
+
+        foreach ($items as $item) {
+            $request->has($item) ? $data[$item] = $request->get($item) : null;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Get Status url.
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    private function getStatusUrl()
+    {
+        $status_url = Cache::get('tzsk_status_url');
+
+        if (empty($status_url)) {
+            throw new \Exception("There is no Redirect URL specified.");
+        }
+
+        return urlencode(base64_encode($status_url));
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    protected function getFormFields(Request $request)
+    {
+        $data = Cache::get('tzsk_data');
+        $status_url = $this->getStatusUrl();
+
+        $request->replace($data);
+        $validation = $this->validateRequest($request);
+        $hash = $this->getHashChecksum($request);
+
+        $redirect = collect(config('payu.redirect'))->map(function ($value) use ($request, $status_url) {
+            $separator = str_contains($value, '?') ? '&' : '?';
+            return url($value . $separator . 'callback=' . $status_url);
+        })->all();
+
+        $form_fields = array_merge(['key' => config('payu.key'), 'hash' => $hash],
+            array_merge($redirect, $validation));
+
+        return $form_fields;
     }
 
 }
