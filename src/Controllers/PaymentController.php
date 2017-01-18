@@ -91,11 +91,11 @@ class PaymentController extends Controller
     {
         $validation = collect(array_flip(config('payu.required_fields')))->map(function($value) {
             return 'required';
-        });
+        })->all();
 
         $data = $this->getFormDataArray($request);
 
-        $validator = Validator::make($request->all(), $validation->all());
+        $validator = Validator::make($request->all(), $validation);
 
         if ($validator->fails()) {
             throw new \InvalidArgumentException($validator->errors()->first());
