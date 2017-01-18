@@ -7,10 +7,10 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is a Package for `PayU India` payment gateway integration with 
-`Laravel 5.2 or Higher`. Now payment gateway made simple.
+This is a Package for `PayU India` payment gateway integration with
+`Laravel 5.1 or Higher`. Now payment gateway made simple.
 
-Older Version Support (5.1.\*) is Coming Soon for those who are still using PHP 5.4.\*
+Support for `Laravel 5.1` has been added.
 ## Install
 
 Via Composer
@@ -67,7 +67,7 @@ $data = [
     'firstname' => "John", # Payee Name.
     'email' => "john@doe.com", # Payee Email Address.
     'phone' => "9876543210", # Payee Phone Number.
-    
+
     ... # Additional Fields With Data.
     ... # Optional Fields With Data.
 ];
@@ -75,14 +75,14 @@ $data = [
 Some additional fields that you can have with the data:
 ```php
 $additional_fields = [
-    "lastname", "address1", "address2", 
+    "lastname", "address1", "address2",
     "city", "state", "country", "zipcode"
 ];
 ```
 Some optional fields that you can have with the data:
 ```php
 $optional_fiels = ["udf1", "udf2", "udf3", "udf4", "udf5"];
-``` 
+```
 
 Now make the Payment by calling make:
 
@@ -94,15 +94,15 @@ return Payment::make($data, function($then) {
     $then->redirectAction('PaymentController@status'); # Your Status action.
     # OR...
     $then->redirectRoute('payment_status'); # Your Status Route.
-}); 
-    
+});
+
 /**
 * So here you will need another route to redirect to after payment is done.
 */
 
 ```
 
-Now, in that status route that you have created will receive a Payment 
+Now, in that status route that you have created will receive a Payment
 instance of the Migration table.
 
 **For Example:**
@@ -110,7 +110,7 @@ instance of the Migration table.
 public function status() {
     $payment = Payment::capture(); # Recieve the payment.
     # Returns PayuPayment Instance.
-    
+
     ...
 }
 ```
@@ -155,9 +155,9 @@ Inside the Model Class:
 class Order extends Model {
 
     use Payable;
-    
+
     ...
-    
+
 }
 ```
 
@@ -171,7 +171,7 @@ public function status() {
         'payable_id' => $order->id, # Your Order Table Primary Key.
         'payable_type' => 'App\Order', # Your Order Model Namespace.
     ])->save();
-    
+
     ...
 }
 ```

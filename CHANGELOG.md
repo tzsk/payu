@@ -8,13 +8,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Payment Verify Functionality.
 - Simple Polymorphic Relation.
 - More Payment API to make life easier.
+- Laravel 5.1 Support added.
 
 ### Deprecated
 - Nothing
 
 ### Fixed
 - Bugs about Callback URL.
-- Migration File Bug fixed. 
+- Migration File Bug fixed.
+- Bugs about CSRF token.
 - Other Code Improvements.
 
 ### Removed
