@@ -89,30 +89,19 @@ class PaymentController extends Controller
      */
     protected function validateRequest(Request $request)
     {
-        list($validation, $data) = $this->getValidationData($request);
-
-        $validator = Validator::make($request->all(), $validation);
-
-        if ($validator->fails()) {
-            throw new \InvalidArgumentException($validator->errors()->first());
-        }
-
-        return $data;
-    }
-
-    /**
-     * @param  Request $request
-     * @return array
-     */
-    protected function getValidationData(Request $request)
-    {
         $validation = collect(array_flip(config('payu.required_fields')))->map(function($value) {
             return 'required';
         });
 
         $data = $this->getFormDataArray($request);
 
-        return [$validation, $data];
+        $validator = Validator::make($request->all(), $validation->all());
+
+        if ($validator->fails()) {
+            throw new \InvalidArgumentException($validator->errors()->first());
+        }
+
+        return $data;
     }
 
     /**
@@ -194,7 +183,7 @@ class PaymentController extends Controller
 
         $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
             $separator = str_contains($value, '?') ? '&' : '?';
-            return url($value.$separator.'callback='.$status_url);
+            return url($value.$separator.'_token='.csrf_token().'&'.'callback='.$status_url);
         })->all();
 
         $form_fields = array_merge(['key' => config('payu.key'), 'hash' => $hash],

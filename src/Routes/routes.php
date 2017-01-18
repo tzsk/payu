@@ -1,13 +1,17 @@
 <?php
-
 /**
- * Make the payment request.
+ * Routes for payment.
  */
-Route::group(['middleware' => 'web', 'namespace' => 'Tzsk\Payu\Controllers'], function() {
+
+Route::group(['namespace' => 'Tzsk\Payu\Controllers'], function() {
+
+	/**
+	 * Make the payment request.
+	 */
     Route::get('tzsk/payment', 'PaymentController@index');
-});
 
-/**
- * Get Response from payment.
- */
-Route::post('tzsk/payment/{status}', 'Tzsk\Payu\Controllers\PaymentController@payment');
+	/**
+	 * Get Response from payment.
+	 */
+	Route::post('tzsk/payment/{status}', 'PaymentController@payment');
+});
