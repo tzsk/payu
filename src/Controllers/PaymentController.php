@@ -89,30 +89,19 @@ class PaymentController extends Controller
      */
     protected function validateRequest(Request $request)
     {
-        list($validation, $data) = $this->getValidationData($request);
-
-        $validator = Validator::make($request->all(), $validation);
-
-        if ($validator->fails()) {
-            throw new \InvalidArgumentException($validator->errors()->first());
-        }
-
-        return $data;
-    }
-
-    /**
-     * @param  Request $request
-     * @return array
-     */
-    protected function getValidationData(Request $request)
-    {
         $validation = collect(array_flip(config('payu.required_fields')))->map(function($value) {
             return 'required';
         });
 
         $data = $this->getFormDataArray($request);
 
-        return [$validation, $data];
+        $validator = Validator::make($request->all(), $validation->all());
+
+        if ($validator->fails()) {
+            throw new \InvalidArgumentException($validator->errors()->first());
+        }
+
+        return $data;
     }
 
     /**
