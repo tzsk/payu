@@ -165,7 +165,7 @@ class PaymentController extends Controller
     /**
      * Get Status url.
      *
-     * @return mixed
+     * @return string
      * @throws \Exception
      */
     private function getStatusUrl()
@@ -192,9 +192,9 @@ class PaymentController extends Controller
         $validation = $this->validateRequest($request);
         $hash = $this->getHashChecksum($request);
 
-        $redirect = collect(config('payu.redirect'))->map(function ($value) use ($request, $status_url) {
+        $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
             $separator = str_contains($value, '?') ? '&' : '?';
-            return url($value . $separator . 'callback=' . $status_url);
+            return url($value.$separator.'callback='.$status_url);
         })->all();
 
         $form_fields = array_merge(['key' => config('payu.key'), 'hash' => $hash],
