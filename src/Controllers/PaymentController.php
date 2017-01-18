@@ -89,7 +89,7 @@ class PaymentController extends Controller
      */
     protected function validateRequest(Request $request)
     {
-        $validation = collect(array_flip(config('payu.required_fields')))->map(function($value) {
+        $validation = collect(array_flip(config('payu.required_fields')))->map(function() {
             return 'required';
         })->all();
 
