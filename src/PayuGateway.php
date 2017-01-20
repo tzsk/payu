@@ -73,10 +73,10 @@ class PayuGateway
      * @param $txn_id
      * @return object
      */
-    public function verify($txn_id)
+    public function verify($txnid)
     {
-        $txn_id = is_array($txn_id) ? $txn_id : [$txn_id];
-        $verification = new PaymentVerification($txn_id);
+        $txn_id = is_array($txnid) ? $txnid : [$txnid];
+        $verification = new PaymentVerification($txnid);
 
         return $verification->request();
     }
