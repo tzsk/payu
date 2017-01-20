@@ -75,7 +75,7 @@ class PayuGateway
      */
     public function verify($txnid)
     {
-        $txn_id = is_array($txnid) ? $txnid : [$txnid];
+        $txnid = is_array($txnid) ? $txnid : [$txnid];
         $verification = new PaymentVerification($txnid);
 
         return $verification->request();
