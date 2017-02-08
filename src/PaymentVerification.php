@@ -1,7 +1,6 @@
 <?php
 namespace Tzsk\Payu;
 
-
 use Tzsk\Payu\Model\PayuPayment;
 
 class PaymentVerification
@@ -249,5 +248,4 @@ class PaymentVerification
 
         return $attributes;
     }
-
 }

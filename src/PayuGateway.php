@@ -1,7 +1,6 @@
 <?php
 namespace Tzsk\Payu;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Tzsk\Payu\Model\PayuPayment;
@@ -125,5 +124,4 @@ class PayuGateway
 
         return $this;
     }
-
 }

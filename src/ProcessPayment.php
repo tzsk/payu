@@ -1,7 +1,6 @@
 <?php
 namespace Tzsk\Payu;
 
-
 use Illuminate\Http\Request;
 
 class ProcessPayment
@@ -50,7 +49,6 @@ class ProcessPayment
             default:
                 return self::STATUS_FAILED;
         }
-
     }
 
     /**
@@ -72,5 +70,4 @@ class ProcessPayment
     {
         return $this->request->has('hash') ? (string) $this->request->hash : null;
     }
-
 }

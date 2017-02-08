@@ -1,7 +1,6 @@
 <?php
 namespace Tzsk\Payu\Facade;
 
-
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -16,8 +15,8 @@ class Payment extends Facade
      *
      * @return string
      */
-    public static function getFacadeAccessor() {
+    public static function getFacadeAccessor()
+    {
         return 'tzsk-payu';
     }
-
 }
