@@ -1,12 +1,13 @@
 # PayU Laravel Payment Gateway
 
 [![Software License][ico-license]](LICENSE.md)
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Total Downloads][ico-downloads]][link-downloads]
+[![Dependency Status](https://www.versioneye.com/user/projects/589aa97c446b8e003c2a402c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/589aa97c446b8e003c2a402c)
 [![StyleCI](https://styleci.io/repos/75501723/shield?branch=master)](https://styleci.io/repos/75501723)
 [![Build Status](https://scrutinizer-ci.com/g/tzsk/payu/badges/build.png?b=master)](https://scrutinizer-ci.com/g/tzsk/payu/build-status/master)
-[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Code Climate](https://codeclimate.com/github/tzsk/payu/badges/gpa.svg)](https://codeclimate.com/github/tzsk/payu)
 [![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
 
 This is a Package for `PayU India` payment gateway integration with
 `Laravel 5.1 or Higher`. Now payment gateway made simple.
