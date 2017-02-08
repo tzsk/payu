@@ -1,8 +1,9 @@
 # PayU Laravel Payment Gateway
 
+[![Software License][ico-license]](LICENSE.md)
+[![StyleCI](https://styleci.io/repos/75501723/shield?branch=master)](https://styleci.io/repos/75501723)
 [![Build Status](https://scrutinizer-ci.com/g/tzsk/payu/badges/build.png?b=master)](https://scrutinizer-ci.com/g/tzsk/payu/build-status/master)
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
 [![Code Climate](https://codeclimate.com/github/tzsk/payu/badges/gpa.svg)](https://codeclimate.com/github/tzsk/payu)
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
