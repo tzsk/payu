@@ -1,7 +1,6 @@
 <?php
 namespace Tzsk\Payu\Fragment;
 
-
 use Tzsk\Payu\Model\PayuPayment;
 
 trait Payable
@@ -15,5 +14,4 @@ trait Payable
     {
         return $this->morphMany(PayuPayment::class, 'payable');
     }
-
 }

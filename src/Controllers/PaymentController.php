@@ -1,7 +1,6 @@
 <?php
 namespace Tzsk\Payu\Controllers;
 
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -51,7 +50,7 @@ class PaymentController extends Controller
      * @return object
      * @throws \Exception
      */
-    protected  function getPaymentFormInformation(Request $request)
+    protected function getPaymentFormInformation(Request $request)
     {
         $form_fields = $this->getFormFields($request);
 
@@ -89,7 +88,7 @@ class PaymentController extends Controller
      */
     protected function validateRequest(Request $request)
     {
-        $validation = collect(array_flip(config('payu.required_fields')))->map(function() {
+        $validation = collect(array_flip(config('payu.required_fields')))->map(function () {
             return 'required';
         })->all();
 
@@ -124,7 +123,6 @@ class PaymentController extends Controller
             }
 
             $payment = $payment_instance->id;
-
         } else {
             $payment = $attributes;
         }
@@ -181,7 +179,7 @@ class PaymentController extends Controller
         $validation = $this->validateRequest($request);
         $hash = $this->getHashChecksum($request);
 
-        $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
+        $redirect = collect(config('payu.redirect'))->map(function ($value) use ($request, $status_url) {
             $separator = str_contains($value, '?') ? '&' : '?';
             return url($value.$separator.'_token='.csrf_token().'&'.'callback='.$status_url);
         })->all();
@@ -191,5 +189,4 @@ class PaymentController extends Controller
 
         return $form_fields;
     }
-
 }

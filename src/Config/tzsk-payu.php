@@ -54,7 +54,9 @@ return [
     | These are the fields that are optional for making a payment.
     |
     */
-    'optional_fields' => array_map(function($i) { return "udf{$i}"; }, range(1, 10)),
+    'optional_fields' => array_map(function ($i) {
+        return "udf{$i}";
+    }, range(1, 10)),
 
     'additional_fields' => ["lastname", "address1", "address2", "city", "state", "country", "zipcode"],
 

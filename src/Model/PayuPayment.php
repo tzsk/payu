@@ -148,5 +148,4 @@ class PayuPayment extends Model
     {
         return $this->cardnum;
     }
-
 }
