@@ -8,7 +8,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Payment Verify Functionality.
 - Simple Polymorphic Relation.
 - More Payment API to make life easier.
-- Laravel 5.1 Support added.
 
 ### Deprecated
 - Nothing
@@ -20,7 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Other Code Improvements.
 
 ### Removed
-- Nothing
+- Support for Laravel 5.1 due to lack of `web` middleware.
 
 ### Security
 - Security patches.

@@ -10,9 +10,9 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 
 This is a Package for `PayU India` payment gateway integration with
-`Laravel 5.1 or Higher`. Now payment gateway made simple.
+`Laravel 5.2 or Higher`. Now payment gateway made simple.
 
-Support for `Laravel 5.1` has been added.
+Support for `Laravel 5.1` has been **REMOVED**. Due to lack of `web` middleware.
 ## Install
 
 Via Composer
@@ -103,6 +103,8 @@ return Payment::make($data, function($then) {
 */
 
 ```
+
+**Make sure both routes are inside `web` middleware**
 
 Now, in that status route that you have created will receive a Payment
 instance of the Migration table.

@@ -6,18 +6,33 @@
         body, html {
             width:100%;
             height:100%;
+            margin:0;
+            padding:0;
+            position: relative;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
         }
         .loader {
             width: 100px;
             height: 100px;
             position: relative;
-            margin: 100px auto;
+            margin:0 auto;
         }
         .loader .logo {
             width: 45%;
             position: absolute;
             left: 27.5%;
             top: 27.5%;
+        }
+        .table {
+            display: table;
+            width:100%;
+            height:100%;
+        }
+        .table-cell {
+            display: table-cell;
+            vertical-align: middle;
         }
 
         .bounce1, .bounce2, .bounce3 {
@@ -70,11 +85,15 @@
     </style>
 </head>
 <body>
-<div class="loader">
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
-    <div class="logo"></div>
+<div class="table">
+    <div class="table-cell">
+        <div class="loader">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+            <div class="logo"></div>
+        </div>
+    </div>
 </div>
 <div style="display: none;">
     <form action="{{ $payment->url }}" id="payment_form" method="POST">

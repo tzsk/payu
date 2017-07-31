@@ -1,9 +1,10 @@
 <?php
 namespace Tzsk\Payu;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
+use Tzsk\Payu\Helpers\Config;
 use Tzsk\Payu\Helpers\Redirector;
+use Tzsk\Payu\Helpers\Storage;
 use Tzsk\Payu\Model\PayuPayment;
 
 class PayuGateway
@@ -37,11 +38,17 @@ class PayuGateway
     public function make(array $data, $callback)
     {
         $redirector = new Redirector();
-
         call_user_func($callback, $redirector);
-        Cache::put('tzsk_data', $data, 5);
-        Cache::put('tzsk_status_url', $redirector->getUrl(), 5);
-        Cache::put('tzsk_model', $this->model, 15);
+
+        $session = [
+            'data' => $data,
+            'status_url' => $redirector->getUrl(),
+            'model' => $this->model ? [
+                'id' => $this->model->id,
+                'class' => get_class($this->model)
+            ] : null
+        ];
+        session()->put('tzsk_payu_data', $session);
 
         return redirect()->to('tzsk/payment');
     }
@@ -53,13 +60,14 @@ class PayuGateway
      */
     public function capture()
     {
-        $pay = Cache::get('tzsk_payment');
+        $storage = new Storage();
+        $config = new Config();
 
-        if (config('payu.driver') == 'database') {
-            return PayuPayment::find($pay);
+        if ($config->getDriver() == 'database') {
+            return PayuPayment::find($storage->getPayment());
         }
 
-        return new PayuPayment($pay);
+        return new PayuPayment($storage->getPayment());
     }
 
     /**
