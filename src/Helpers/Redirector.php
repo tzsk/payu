@@ -1,7 +1,6 @@
 <?php
 namespace Tzsk\Payu\Helpers;
 
-
 class Redirector
 {
     protected $url;

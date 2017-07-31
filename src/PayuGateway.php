@@ -77,5 +77,4 @@ class PayuGateway
         return $verification->request();
     }
 
-
 }
