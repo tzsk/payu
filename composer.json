@@ -1,7 +1,7 @@
 {
     "name": "tzsk/payu",
     "type": "library",
-    "description": "PayU India Payment Gateway Integration for Laravel 5.",
+    "description": "PayU India Payment Gateway Integration for Laravel 5.2 and above.",
     "keywords": [
         "tzsk",
         "payu",
