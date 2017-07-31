@@ -21,7 +21,7 @@ class PayuServiceProvider extends ServiceProvider
         /**
          * Register singleton.
          */
-        $this->app->singleton('tzsk-payu', function ($app) {
+        $this->app->singleton('tzsk-payu', function($app) {
             return new PayuGateway();
         });
     }
