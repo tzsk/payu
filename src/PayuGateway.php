@@ -8,7 +8,6 @@ use Tzsk\Payu\Model\PayuPayment;
 
 class PayuGateway
 {
-
     /**
      * Model to add;
      *
@@ -66,7 +65,7 @@ class PayuGateway
     /**
      * Get Status of a given Transaction.
      *
-     * @param $txn_id
+     * @param $txnid string
      * @return object
      */
     public function verify($txnid)

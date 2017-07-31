@@ -3,6 +3,9 @@ namespace Tzsk\Payu\Helpers;
 
 class Redirector
 {
+    /**
+     * @var string
+     */
     protected $url;
 
     /**
