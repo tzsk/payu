@@ -88,7 +88,7 @@ class PaymentController extends Controller
      */
     protected function validateRequest(Request $request)
     {
-        $validation = collect(array_flip(config('payu.required_fields')))->map(function () {
+        $validation = collect(array_flip(config('payu.required_fields')))->map(function() {
             return 'required';
         })->all();
 
@@ -179,7 +179,7 @@ class PaymentController extends Controller
         $validation = $this->validateRequest($request);
         $hash = $this->getHashChecksum($request);
 
-        $redirect = collect(config('payu.redirect'))->map(function ($value) use ($request, $status_url) {
+        $redirect = collect(config('payu.redirect'))->map(function($value) use ($request, $status_url) {
             $separator = str_contains($value, '?') ? '&' : '?';
             return url($value.$separator.'_token='.csrf_token().'&'.'callback='.$status_url);
         })->all();

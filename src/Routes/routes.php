@@ -3,7 +3,7 @@
  * Routes for payment.
  */
 
-Route::group(['namespace' => 'Tzsk\Payu\Controllers'], function () {
+Route::group(['namespace' => 'Tzsk\Payu\Controllers'], function() {
 
     /**
      * Make the payment request.
