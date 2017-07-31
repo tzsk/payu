@@ -57,5 +57,4 @@ class Redirector
     {
         return $this->url;
     }
-
 }
