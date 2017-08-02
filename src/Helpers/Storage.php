@@ -33,10 +33,10 @@ class Storage
     {
         $data = Session::get('tzsk_payu_data');
 
-        $this->status_url = empty($data['status_url']) ? null : $data['status_url'];
-        $this->model = empty($data['model']) ? null : $data['model'];
-        $this->payment = empty($data['payment']) ? null : $data['payment'];
-        $this->data = empty($data['data']) ? [] : $data['data'];
+        $this->setStatusUrl(@$data['status_url']);
+        $this->setModel(@$data['model']);
+        $this->setPayment(@$data['payment']);
+        $this->setData(@$data['data']);
     }
 
     /**
@@ -69,5 +69,37 @@ class Storage
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * @param string $status_url
+     */
+    public function setStatusUrl($status_url = null)
+    {
+        $this->status_url = $status_url;
+    }
+
+    /**
+     * @param string $model
+     */
+    public function setModel($model = null)
+    {
+        $this->model = $model;
+    }
+
+    /**
+     * @param array $data
+     */
+    public function setData($data = [])
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @param PayuPayment $payment
+     */
+    public function setPayment($payment = null)
+    {
+        $this->payment = $payment;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Tzsk\Payu;
 
+use Tzsk\Payu\Helpers\Config;
 use Tzsk\Payu\Model\PayuPayment;
 
 class PaymentVerification
@@ -47,6 +48,10 @@ class PaymentVerification
      */
     protected $response = [];
 
+    /**
+     * @var Config
+     */
+    protected $config;
 
     /**
      * PaymentVerification constructor.
@@ -55,11 +60,13 @@ class PaymentVerification
      */
     public function __construct($txn_id)
     {
-        $this->txn_id = $txn_id;
-        $this->key = config('payu.key');
-        $this->salt = config('payu.salt');
+        $this->config = new Config();
 
-        $env = config('payu.env');
+        $this->txn_id = $txn_id;
+        $this->key = $this->config->getKey();
+        $this->salt = $this->config->getSalt();
+
+        $env = $this->config->getEnv();
         if ($env != 'test') {
             $env = 'info';
         }
@@ -75,7 +82,7 @@ class PaymentVerification
     {
         $this->sendRequest();
 
-        if (config('payu.driver') != 'database') {
+        if ($this->config->getDriver() != 'database') {
             $this->updatePayuTransaction();
         }
 
