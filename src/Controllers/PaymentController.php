@@ -23,15 +23,6 @@ class PaymentController extends Controller
     protected $storage;
 
     /**
-     * PaymentController constructor.
-     */
-    public function __construct()
-    {
-        $this->config = new Config();
-        $this->storage = new Storage();
-    }
-
-    /**
      * Got to payment.
      *
      * @param Request $request
@@ -39,6 +30,8 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
+        $this->bootstrap();
+
         $payment = $this->getPaymentFormInformation($request);
 
         return view('tzsk::payment_form', compact('payment'));
@@ -52,6 +45,8 @@ class PaymentController extends Controller
      */
     public function payment(Request $request)
     {
+        $this->bootstrap();
+
         $attributes = $request->only([
             'txnid', 'mihpayid', 'firstname', 'email', 'phone', 'amount', 'discount',
             'net_amount_debit', 'data', 'status', 'unmappedstatus', 'mode', 'bank_ref_num',
@@ -64,6 +59,15 @@ class PaymentController extends Controller
         $this->generatePaymentObject($attributes);
 
         return redirect()->to(base64_decode($request->callback));
+    }
+
+    /**
+     * Bootstrap the Payment Controller.
+     */
+    protected function bootstrap()
+    {
+        $this->config = new Config();
+        $this->storage = new Storage();
     }
 
     /**
