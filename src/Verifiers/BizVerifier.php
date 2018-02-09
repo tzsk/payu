@@ -51,9 +51,9 @@ class BizVerifier extends AbstractVerifier
         $hash_str = $this->config->getKey().'|'.$this->command.'|'.$txn_string.'|'.$this->config->getSalt();
 
         return [
-            'key' => $this->config->getKey(), 
-            'hash' => strtolower(hash('sha512', $hash_str)), 
-            'var1' => $txn_string, 
+            'key' => $this->config->getKey(),
+            'hash' => strtolower(hash('sha512', $hash_str)),
+            'var1' => $txn_string,
             'command' => $this->command
         ];
     }
@@ -83,7 +83,7 @@ class BizVerifier extends AbstractVerifier
         
         $response = ['status' => true, 'data' => []];
 
-        foreach($this->txnIds as $id) {
+        foreach ($this->txnIds as $id) {
             $response['data'][$id] = $this->getInstance($data, $id);
         }
 
@@ -100,7 +100,7 @@ class BizVerifier extends AbstractVerifier
         $request = new Request((array) $data->transaction_details->{$id});
         $attributes = (new Processor($request))->process();
 
-        if($this->config->getDriver() == 'database') {
+        if ($this->config->getDriver() == 'database') {
             return PayuPayment::find($attributes);
         }
 

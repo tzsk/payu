@@ -44,7 +44,7 @@ class MoneyVerifier extends AbstractVerifier
     protected function fields()
     {
         return [
-            'merchantKey' => $this->config->getKey(), 
+            'merchantKey' => $this->config->getKey(),
             'merchantTransactionIds' => implode("|", $this->txnIds)
         ];
     }
@@ -67,7 +67,7 @@ class MoneyVerifier extends AbstractVerifier
     {
         $response = ['status' => true, 'data' => []];
 
-        foreach($this->txnIds as $id) {
+        foreach ($this->txnIds as $id) {
             $response['data'][$id] = $this->getInstance($data, $id);
         }
 
@@ -84,7 +84,7 @@ class MoneyVerifier extends AbstractVerifier
         $request = new Request((array) $data->transaction_details->{$id});
         $attributes = (new Processor($request))->process();
 
-        if($this->config->getDriver() == 'database') {
+        if ($this->config->getDriver() == 'database') {
             return PayuPayment::find($attributes);
         }
 

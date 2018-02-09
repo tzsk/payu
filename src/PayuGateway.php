@@ -111,7 +111,7 @@ class PayuGateway
     {
         session()->put('tzsk_payu_data', ['account' => $this->account]);
 
-        $transactionId = is_array($transactionId) ? 
+        $transactionId = is_array($transactionId) ?
             $transactionId : explode("|", $transactionId);
 
         return $this->getVerifier($transactionId)->verify();
