@@ -6,6 +6,16 @@ class Config
     /**
      * @var string
      */
+    protected $account;
+
+    /**
+     * @var string
+     */
+    protected $default;
+
+    /**
+     * @var string
+     */
     protected $env;
 
     /**
@@ -17,6 +27,16 @@ class Config
      * @var string
      */
     protected $salt;
+
+    /**
+     * @var boolean
+     */
+    protected $money = false;
+
+    /**
+     * @var string
+     */
+    protected $auth;
 
     /**
      * @var string
@@ -49,15 +69,64 @@ class Config
     protected $redirect;
 
     /**
-     * Config constructor.
+     * @var mixed
      */
-    public function __construct()
+    protected $config;
+
+    /**
+     * @param string $account
+     */
+    public function __construct($account = null)
     {
-        foreach (config('payu') as $key => $value) {
+        $this->config = config('payu');
+        $this->account = $account;
+
+        $this->assign($this->config);
+        $this->boot();
+    }
+
+    /**
+     * @param array $config
+     */
+    public function assign($config)
+    {
+        foreach ($config as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->{$key} = $value;
             }
         }
+    }
+
+    public function boot()
+    {
+        $account = $this->account ? $this->account : $this->config['default'];
+
+        try {
+            $credentials = $this->config['accounts'][$account];
+        } catch (\Exception $e) {
+            throw new \Exception('Account credentials does not exist.');
+        }
+
+        $this->assign($credentials);
+    }
+
+    /**
+     * @param string $account
+     * @return Config
+     */
+    public function setAccount($account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 
     /**
@@ -130,5 +199,53 @@ class Config
     public function getRedirect()
     {
         return $this->redirect;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPayuMoney()
+    {
+        return $this->money;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuth()
+    {
+        return $this->auth;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentUrl()
+    {
+        return 'https://' . $this->prefix() . "." . $this->endpoint;
+    }
+
+    /**
+     * @return string
+     */
+    protected function prefix()
+    {
+        if ($this->env == 'test' && $this->money) {
+            return 'sandboxsecure';
+        }
+        
+        if ($this->env == 'test') {
+            return 'test';
+        }
+
+        return 'secure';
     }
 }

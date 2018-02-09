@@ -12,7 +12,7 @@ class PayuPayment extends Model
      * @var array
      */
     protected $fillable = [
-        'payable_id', 'payable_type', 'txnid', 'mihpayid', 'firstname', 'email', 'phone', 'amount',
+        'account', 'payable_id', 'payable_type', 'txnid', 'mihpayid', 'firstname', 'email', 'phone', 'amount',
         'discount', 'net_amount_debit', 'data', 'status', 'unmappedstatus', 'mode', 'bank_ref_num',
         'bankcode', 'cardnum', 'name_on_card', 'issuing_bank', 'card_type'
     ];

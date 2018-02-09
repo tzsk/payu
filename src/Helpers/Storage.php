@@ -27,16 +27,34 @@ class Storage
     protected $payment;
 
     /**
+     * @var string
+     */
+    protected $account;
+
+    /**
      * Storage constructor.
      */
     public function __construct()
     {
         $data = Session::get('tzsk_payu_data');
 
-        $this->setStatusUrl(@$data['status_url']);
-        $this->setModel(@$data['model']);
-        $this->setPayment(@$data['payment']);
-        $this->setData(@$data['data']);
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->{$key} = $value;
+            }
+        }
+
+        $this->boot();
+    }
+
+    /**
+     * @return void
+     */
+    public function boot()
+    {
+        if (! $this->account) {
+            $this->account = config('payu.default');
+        }
     }
 
     /**
@@ -72,34 +90,10 @@ class Storage
     }
 
     /**
-     * @param string $status_url
+     * @return string
      */
-    public function setStatusUrl($status_url = null)
+    public function getAccount()
     {
-        $this->status_url = $status_url;
-    }
-
-    /**
-     * @param string $model
-     */
-    public function setModel($model = null)
-    {
-        $this->model = $model;
-    }
-
-    /**
-     * @param array $data
-     */
-    public function setData($data = [])
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * @param PayuPayment $payment
-     */
-    public function setPayment($payment = null)
-    {
-        $this->payment = $payment;
+        return $this->account;
     }
 }

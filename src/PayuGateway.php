@@ -6,9 +6,19 @@ use Tzsk\Payu\Helpers\Config;
 use Tzsk\Payu\Helpers\Redirector;
 use Tzsk\Payu\Helpers\Storage;
 use Tzsk\Payu\Model\PayuPayment;
+use Tzsk\Payu\Verifiers\MoneyVerifier;
+use Tzsk\Payu\Verifiers\BizVerifier;
+use Tzsk\Payu\Verifiers\AbstractVerifier;
 
 class PayuGateway
 {
+    /**
+     * Account to use
+     *
+     * @var string
+     */
+    protected $account;
+
     /**
      * Model to add;
      *
@@ -20,11 +30,22 @@ class PayuGateway
      * Pass any model to Add Polymorphic Relation.
      *
      * @param $model
-     * @return $this
+     * @return PayuGateway
      */
     public function with($model)
     {
         $this->model = $model;
+
+        return $this;
+    }
+
+    /**
+     * @param string $account
+     * @return PayuGateway
+     */
+    public function via($account)
+    {
+        $this->account = $account;
 
         return $this;
     }
@@ -40,17 +61,27 @@ class PayuGateway
         $redirector = new Redirector();
         call_user_func($callback, $redirector);
 
-        $session = [
+        session()->put('tzsk_payu_data', $this->makeSession($data, $redirector));
+
+        return redirect()->to('tzsk/payment');
+    }
+
+    /**
+     * @param array $data
+     * @param Redirector $redirector
+     * @return array
+     */
+    protected function makeSession($data, Redirector $redirector)
+    {
+        return [
             'data' => $data,
             'status_url' => $redirector->getUrl(),
+            'account' => $this->account,
             'model' => $this->model ? [
                 'id' => $this->model->id,
                 'class' => get_class($this->model)
             ] : null
         ];
-        session()->put('tzsk_payu_data', $session);
-
-        return redirect()->to('tzsk/payment');
     }
 
     /**
@@ -61,7 +92,7 @@ class PayuGateway
     public function capture()
     {
         $storage = new Storage();
-        $config = new Config();
+        $config = new Config($storage->getAccount());
 
         if ($config->getDriver() == 'database') {
             return PayuPayment::find($storage->getPayment());
@@ -73,14 +104,32 @@ class PayuGateway
     /**
      * Get Status of a given Transaction.
      *
-     * @param $txnid string
+     * @param $transactionId string
      * @return object
      */
-    public function verify($txnid)
+    public function verify($transactionId)
     {
-        $txnid = is_array($txnid) ? $txnid : [$txnid];
-        $verification = new PaymentVerification($txnid);
+        session()->put('tzsk_payu_data', ['account' => $this->account]);
 
-        return $verification->request();
+        $transactionId = is_array($transactionId) ? 
+            $transactionId : explode("|", $transactionId);
+
+        return $this->getVerifier($transactionId)->verify();
+    }
+
+    /**
+     * @param string $transactionId
+     * @return AbstractVerifier
+     */
+    protected function getVerifier($transactionId)
+    {
+        $account = $this->account ? $this->account : config('payu.default');
+        $config = new Config($account);
+
+        if ($config->isPayuMoney()) {
+            return new MoneyVerifier($transactionId, $account);
+        }
+        
+        return new BizVerifier($transactionId, $account);
     }
 }

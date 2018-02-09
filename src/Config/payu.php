@@ -1,6 +1,7 @@
 <?php
 
 return [
+    
     /*
     |--------------------------------------------------------------------------
     | Payment Environment
@@ -17,23 +18,52 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Merchant Key
+    | Default Account to use
     |--------------------------------------------------------------------------
     |
-    | This is the merchant key to be used for payment.
+    | The account to be used for Payment
     |
     */
-    'key' => 'gtKFFx',
+    'default' => 'payubiz',
 
     /*
     |--------------------------------------------------------------------------
-    | Merchant Salt
+    | All Accounts array
     |--------------------------------------------------------------------------
     |
-    | This is the merchant salt to be used for payment.
+    | All the different accounts with its names
     |
     */
-    'salt' => 'eCwWELxi',
+    'accounts' => [
+        
+        /*
+        |--------------------------------------------------------------------------
+        | Account Credentials
+        |--------------------------------------------------------------------------
+        |
+        | The account name and credentials which are found in the PayuBiz or
+        | PayuMoney Console.
+        |
+        | key   => (string)     Merchant Key.
+        | salt  => (string)     Merchant Salt.
+        | money => (boolean)    Is it a payumoney account?
+        | auth  => (string)     Authorization Token if it is a payumoney account.
+        |
+        */
+        'payubiz' => [
+            'key' => 'gtKFFx',
+            'salt' => 'eCwWELxi',
+            'money' => false,
+            'auth' => null
+        ],
+
+        'payumoney' => [
+            'key' => 'JBZaLc',
+            'salt' => 'GQs7yium',
+            'money' => true,
+            'auth' => null
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +77,7 @@ return [
     | in config/session.php
     |
     */
-    'driver' => 'database',
+    'driver' => 'session',
 
     /*
     |--------------------------------------------------------------------------

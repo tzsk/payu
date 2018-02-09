@@ -15,7 +15,8 @@ class CreatePayuPaymentsTable extends Migration
     {
         Schema::create('payu_payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('payable_id')->default(0);
+            $table->string('account');
+            $table->unsignedInteger('payable_id')->nullable();
             $table->string('payable_type')->nullable();
             $table->string('txnid');
             $table->string('mihpayid');
