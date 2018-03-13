@@ -50,6 +50,14 @@
         "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
     },
     "extra": {
+        "laravel": {
+            "providers": [
+                "Tzsk\\Payu\\Provider\\PayuServiceProvider"
+            ],
+            "aliases": {
+                "Payment": "Tzsk\\Payu\\Facade\\Payment"
+            }
+        },
         "branch-alias": {
             "dev-master": "1.0-dev"
         }

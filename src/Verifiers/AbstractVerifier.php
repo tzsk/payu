@@ -4,6 +4,9 @@ namespace Tzsk\Payu\Verifiers;
 
 use GuzzleHttp\Client;
 use Tzsk\Payu\Helpers\Config;
+use Illuminate\Http\Request;
+use Tzsk\Payu\Helpers\Processor;
+use Tzsk\Payu\Model\PayuPayment;
 
 abstract class AbstractVerifier
 {
@@ -26,6 +29,22 @@ abstract class AbstractVerifier
         $this->txnIds = $transaction_ids;
         $this->config = new Config($account);
         $this->client = new Client();
+    }
+
+    /**
+     * @param object $data
+     * @return PayuPayment
+     */
+    protected function getInstance($data)
+    {
+        $request = new Request((array) $data);
+        $attributes = (new Processor($request))->process();
+
+        if($this->config->getDriver() == 'database') {
+            return PayuPayment::find($attributes);
+        }
+
+        return new PayuPayment($attributes);
     }
 
     /**

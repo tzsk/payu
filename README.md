@@ -3,7 +3,6 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Dependency Status](https://www.versioneye.com/user/projects/589aa97c446b8e003c2a402c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/589aa97c446b8e003c2a402c)
 [![StyleCI](https://styleci.io/repos/75501723/shield?branch=master)](https://styleci.io/repos/75501723)
 [![Build Status](https://scrutinizer-ci.com/g/tzsk/payu/badges/build.png?b=master)](https://scrutinizer-ci.com/g/tzsk/payu/build-status/master)
 [![Code Climate](https://codeclimate.com/github/tzsk/payu/badges/gpa.svg)](https://codeclimate.com/github/tzsk/payu)

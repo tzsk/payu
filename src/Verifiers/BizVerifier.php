@@ -2,11 +2,6 @@
 
 namespace Tzsk\Payu\Verifiers;
 
-use Tzsk\Payu\Helpers\Config;
-use Tzsk\Payu\Model\PayuPayment;
-use Tzsk\Payu\Helpers\Processor;
-use Illuminate\Http\Request;
-
 class BizVerifier extends AbstractVerifier
 {
     /**
@@ -64,11 +59,8 @@ class BizVerifier extends AbstractVerifier
     protected function prefix()
     {
         $env = $this->config->getEnv();
-        if ($env != 'test') {
-            $env = 'info';
-        }
 
-        return $env;
+        return ($env == 'test') ? $env : 'info';
     }
 
     /**
@@ -78,32 +70,17 @@ class BizVerifier extends AbstractVerifier
     protected function makeResponse($data)
     {
         if ($data->status < 1) {
-            throw new \Exception($data->msg);
+            return (object) ['status' => false, 'data' => [], 'message' => $data->msg];
         }
         
-        $response = ['status' => true, 'data' => []];
+        $response = ['status' => true, 'data' => [], 'message' => ''];
 
         foreach($this->txnIds as $id) {
-            $response['data'][$id] = $this->getInstance($data, $id);
+            if (! empty($data->transaction_details->{$id})) {
+                $response['data'][$id] = $this->getInstance($data->transaction_details->{$id});
+            }
         }
 
         return (object) $response;
-    }
-
-    /**
-     * @param object $data
-     * @param string $id
-     * @return PayuPayment
-     */
-    protected function getInstance($data, $id)
-    {
-        $request = new Request((array) $data->transaction_details->{$id});
-        $attributes = (new Processor($request))->process();
-
-        if($this->config->getDriver() == 'database') {
-            return PayuPayment::find($attributes);
-        }
-
-        return new PayuPayment($attributes);
     }
 }

@@ -2,10 +2,6 @@
 
 namespace Tzsk\Payu\Verifiers;
 
-use Illuminate\Http\Request;
-use Tzsk\Payu\Helpers\Processor;
-use Tzsk\Payu\Model\PayuPayment;
-
 class MoneyVerifier extends AbstractVerifier
 {
     /**
@@ -18,7 +14,6 @@ class MoneyVerifier extends AbstractVerifier
                 'headers' => [
                     'Authorization' => $this->config->getAuth()
                 ],
-                'form_params' => $this->fields()
             ]);
     
             return $this->makeResponse(json_decode($response->getBody()));
@@ -32,8 +27,7 @@ class MoneyVerifier extends AbstractVerifier
      */
     protected function url()
     {
-        // https://test.payumoney.com/payment/payment/chkMerchantTxnStatus
-        $src = "https://{$this->prefix()}.payumoney.com/payment/payment/chkMerchantTxnStatus?";
+        $src = "https://www.payumoney.com/{$this->prefix()}payment/op/getPaymentResponse?";
 
         return $src . http_build_query($this->fields());
     }
@@ -56,7 +50,7 @@ class MoneyVerifier extends AbstractVerifier
     {
         $env = $this->config->getEnv();
 
-        return ($env == 'test') ? 'test' : 'www';
+        return ($env == 'test') ? 'sandbox/' : '';
     }
 
     /**
@@ -65,29 +59,18 @@ class MoneyVerifier extends AbstractVerifier
      */
     protected function makeResponse($data)
     {
-        $response = ['status' => true, 'data' => []];
+        if (!empty($data->errorCode)) {
+            return (object) ['status' => false, 'data' => [], 'message' => $data->message];
+        }
+        $response = ['status' => true, 'data' => [], 'message' => ''];
+        $collection = collect($data->result)->pluck('postBackParam', 'merchantTransactionId');
 
         foreach($this->txnIds as $id) {
-            $response['data'][$id] = $this->getInstance($data, $id);
+            if (! empty($collection[$id])) {
+                $response['data'][$id] = $this->getInstance($collection[$id]);
+            }
         }
 
         return (object) $response;
-    }
-
-    /**
-     * @param object $data
-     * @param string $id
-     * @return PayuPayment
-     */
-    protected function getInstance($data, $id)
-    {
-        $request = new Request((array) $data->transaction_details->{$id});
-        $attributes = (new Processor($request))->process();
-
-        if($this->config->getDriver() == 'database') {
-            return PayuPayment::find($attributes);
-        }
-
-        return new PayuPayment($attributes);
     }
 }

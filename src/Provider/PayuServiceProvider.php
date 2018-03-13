@@ -51,14 +51,14 @@ class PayuServiceProvider extends ServiceProvider
          */
         $this->publishes([
             __DIR__.'/../Config/payu.php' => config_path('payu.php'),
-        ], 'config');
+        ], 'payu-config');
 
         /**
          * Migration file for the payments.
          */
         $this->publishes([
             __DIR__.'/../Migration/' => database_path('migrations')
-        ], 'migrations');
+        ], 'payu-table');
     }
 
     /**
