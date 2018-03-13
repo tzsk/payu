@@ -40,7 +40,7 @@ abstract class AbstractVerifier
         $request = new Request((array) $data);
         $attributes = (new Processor($request))->process();
 
-        if($this->config->getDriver() == 'database') {
+        if ($this->config->getDriver() == 'database') {
             return PayuPayment::find($attributes);
         }
 
