@@ -65,7 +65,7 @@ class MoneyVerifier extends AbstractVerifier
         $response = ['status' => true, 'data' => [], 'message' => ''];
         $collection = collect($data->result)->pluck('postBackParam', 'merchantTransactionId');
 
-        foreach($this->txnIds as $id) {
+        foreach ($this->txnIds as $id) {
             if (! empty($collection[$id])) {
                 $response['data'][$id] = $this->getInstance($collection[$id]);
             }

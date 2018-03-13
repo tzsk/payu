@@ -75,7 +75,7 @@ class BizVerifier extends AbstractVerifier
         
         $response = ['status' => true, 'data' => [], 'message' => ''];
 
-        foreach($this->txnIds as $id) {
+        foreach ($this->txnIds as $id) {
             if (! empty($data->transaction_details->{$id})) {
                 $response['data'][$id] = $this->getInstance($data->transaction_details->{$id});
             }
