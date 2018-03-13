@@ -15,7 +15,7 @@
 This is a Package for `PayU India` payment gateway integration with
 `Laravel 5.2 or Higher`. Now payment gateway made simple.
 
-### <a href="https://tzsk.github.io/payu">Read the full documentation</a>
+### <a href="https://tzsk.github.io/payu" target="_blank">Read the full documentation</a>
 
 ## Change log
 
