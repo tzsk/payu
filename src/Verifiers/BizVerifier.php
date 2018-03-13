@@ -46,9 +46,9 @@ class BizVerifier extends AbstractVerifier
         $hash_str = $this->config->getKey().'|'.$this->command.'|'.$txn_string.'|'.$this->config->getSalt();
 
         return [
-            'key' => $this->config->getKey(), 
-            'hash' => strtolower(hash('sha512', $hash_str)), 
-            'var1' => $txn_string, 
+            'key' => $this->config->getKey(),
+            'hash' => strtolower(hash('sha512', $hash_str)),
+            'var1' => $txn_string,
             'command' => $this->command
         ];
     }

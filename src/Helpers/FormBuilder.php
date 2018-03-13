@@ -88,7 +88,7 @@ class FormBuilder
         }
 
         $checksum_array = array_merge(
-            [$this->config->getKey()], $hash_array, [$this->config->getSalt()] 
+            [$this->config->getKey()], $hash_array, [$this->config->getSalt()]
         );
 
         return hash('sha512', implode('|', $checksum_array));

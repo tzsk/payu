@@ -38,7 +38,7 @@ class MoneyVerifier extends AbstractVerifier
     protected function fields()
     {
         return [
-            'merchantKey' => $this->config->getKey(), 
+            'merchantKey' => $this->config->getKey(),
             'merchantTransactionIds' => implode("|", $this->txnIds)
         ];
     }
