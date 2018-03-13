@@ -1,7 +1,6 @@
 <?php
 namespace Tzsk\Payu;
 
-use Illuminate\Support\Facades\Session;
 use Tzsk\Payu\Helpers\Config;
 use Tzsk\Payu\Helpers\Redirector;
 use Tzsk\Payu\Helpers\Storage;
