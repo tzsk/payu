@@ -1,0 +1,19 @@
+.donation-box {
+    display: block;
+    text-align: center;
+}
+.clear {
+    clear: both;
+}
+.donate {
+    display: inline-block;
+    border: 1px solid #42b983;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    border-radius: 25px;
+}
+.donate:hover {
+    background: #42b983;
+    color: #ffffff;
+}

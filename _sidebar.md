@@ -1,0 +1,7 @@
+* [Home](/)
+* [Getting Started](/getting-started)
+* [Configuration Options](/config)
+* [Making Payment](/usage)
+* [Verifying Payment](/verify)
+* [Legal](/legal)
+* [Contact](/contact)

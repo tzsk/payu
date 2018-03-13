@@ -1,488 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta name="google-site-verification" content="d8qfxcRdqipXlrepmqR4F1Gft528Ezd6Wb54rnbVFuQ" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon.png">
 
-    <meta name="google-site-verification" content="d8qfxcRdqipXlrepmqR4F1Gft528Ezd6Wb54rnbVFuQ" />
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Laravel PayuBiz &amp; PayuMoney Payment Gateway</title>
+  <meta name="description" content="PayuBiz and PayuMoney Payment Gateway Integration Kit/Package for Laravel"/>
+  <meta name="keywords" content="payu, laravel payu, verification, payment gateway, laravel payment, laravel payment gateway, laravel payu payment gateway,payu payment verification"/>
+  <meta property="og:title" content="Laravel Payu India Payment Gateway for Laravel 5.2 and above"/>
+  <meta property="og:description" content="PayuBiz and PayuMoney Payment Gateway Integration Kit/Package for Laravel"/>
+  <meta property="og:image" content="https://i.imgur.com/4AypOy2.png"/>
+  <meta property="og:url" content="https://tzsk.github.io/payu/"/>
+  <meta property="og:type" content="article"/>
 
-	<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-	<link rel="manifest" href="manifest.json">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://tzsk.github.io/payu/">
+  <meta name="twitter:title" content="Laravel Payu India Payment Gateway for Laravel 5.2 and above">
+  <meta name="twitter:description" content="PayuBiz and PayuMoney Payment Gateway Integration Kit/Package for Laravel">
+  <meta name="twitter:image" content="https://i.imgur.com/4AypOy2.png">
 
-    <title>Laravel Payu India Payment Gateway for Laravel 5.2 and above</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Laravel Payu India Payment Gateway Integration Kit/Package for Laravel"/>
-	<meta name="keywords" content="payu, laravel payu, verification, payment gateway, laravel payment, laravel payment gateway, laravel payu payment gateway,payu payment verification"/>
-	<meta property="og:title" content="Laravel Payu India Payment Gateway for Laravel 5.2 and above"/>
-	<meta property="og:description" content="Payu India Payment Gateway Integration Kit/Package for Laravel"/>
-	<meta property="og:image" content="https://tzsk.github.io/payu/img/bg-cta.jpg"/>
-	<meta property="og:url" content="https://tzsk.github.io/payu/"/>
-	<meta property="og:type" content="website"/>
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:url" content="https://tzsk.github.io/payu/">
-	<meta name="twitter:title" content="Laravel Payu India Payment Gateway for Laravel 5.2 and above">
-	<meta name="twitter:description" content="Laravel Payu India Payment Gateway Integration Kit/Package for Laravel">
-	<meta name="twitter:image" content="https://tzsk.github.io/payu/img/bg-cta.jpg">
-	<meta name="author" content="Tzsk - Kazi Mainuddin Ahmed">
-	<meta name="copyright" content="2017 Tzsk - Kazi Mainuddin Ahmed">
-
-
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
-
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
-    <link rel="stylesheet" href="vendor/device-mockups/device-mockups.min.css">
-    <link rel="stylesheet" href="vendor/prism/prism.css">
-
-    <!-- Theme CSS -->
-    <link href="css/new-age.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+  <meta name="author" content="Tzsk - Kazi Mainuddin Ahmed">
+  <meta name="copyright" content="2018 Tzsk - Kazi Mainuddin Ahmed">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body>
+  <div id="app"></div>
 
-<body id="page-top">
-
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Laravel Payu</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#install">Install</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#configure">Configure</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#usage">Usage</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="header-content">
-                        <div class="header-content-inner">
-                            <h1>Payu is an One Click Indian Payment Gateway Integration Kit for Laravel 5.2 and above.</h1>
-                            <a href="#install" class="btn btn-outline btn-xl page-scroll">Install Now for Free!</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="device-container">
-                        <div class="device-mockup iphone6_plus portrait white">
-                            <div class="device">
-                                <div class="screen">
-                                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                    <img src="img/demo-screen-1.png" class="img-responsive" alt="">
-                                </div>
-                                <div class="button">
-                                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section id="install" class="download">
-        <div class="container container-fluid">
-            <div class="row text-center">
-                <div class="col-md-10 col-md-offset-1">
-                    <h2 class="section-heading">Download or Install Payu for Laravel</h2>
-                    <p>We recommend installing through <code>Composer</code>.</p>
-                    <div class="badges">
-                        <a class="btn btn-outline btn-xl page-scroll bg-primary" href="https://github.com/tzsk/payu">View on GitHub</a>
-                        <a class="btn btn-outline btn-xl page-scroll bg-primary" href="https://github.com/tzsk/payu/zipball/master">Download .ZIP</a>
-                        <a class="btn btn-outline btn-xl page-scroll bg-primary" href="https://github.com/tzsk/payu/tarball/master">Download .TAR.GZ</a>
-                    </div>
-                    <div class="badges tokens">
-                        <p><a href="/tzsk/payu/blob/master/LICENSE.md"><img src="https://camo.githubusercontent.com/f8dc8b0dba0c01c69878a1b06bf2167d2bf9a5dd/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d627269676874677265656e2e7376673f7374796c653d666c61742d737175617265" alt="Software License" data-canonical-src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" style="max-width:100%;"></a>
-<a href="https://packagist.org/packages/tzsk/payu"><img src="https://camo.githubusercontent.com/173be062e07298482685fc6d1eb38833f7e09d59/68747470733a2f2f696d672e736869656c64732e696f2f7061636b61676973742f762f747a736b2f706179752e7376673f7374796c653d666c61742d737175617265" alt="Latest Version on Packagist" data-canonical-src="https://img.shields.io/packagist/v/tzsk/payu.svg?style=flat-square" style="max-width:100%;"></a>
-<a href="https://packagist.org/packages/tzsk/payu"><img src="https://camo.githubusercontent.com/7e27067ab9f6e66d6c0ef38aa75adc9afbd1c2c7/68747470733a2f2f696d672e736869656c64732e696f2f7061636b61676973742f64742f747a736b2f706179752e7376673f7374796c653d666c61742d737175617265" alt="Total Downloads" data-canonical-src="https://img.shields.io/packagist/dt/tzsk/payu.svg?style=flat-square" style="max-width:100%;"></a>
-<a href="https://www.versioneye.com/user/projects/589aa97c446b8e003c2a402c"><img src="https://camo.githubusercontent.com/1d36d9d03af8bf5c4dcb72e678f5b674bb1d46f6/68747470733a2f2f7777772e76657273696f6e6579652e636f6d2f757365722f70726f6a656374732f3538396161393763343436623865303033633261343032632f62616467652e7376673f7374796c653d666c61742d737175617265" alt="Dependency Status" data-canonical-src="https://www.versioneye.com/user/projects/589aa97c446b8e003c2a402c/badge.svg?style=flat-square" style="max-width:100%;"></a>
-<a href="https://styleci.io/repos/75501723"><img src="https://camo.githubusercontent.com/060f078263a057dc4220758bcf71b51c06995b30/68747470733a2f2f7374796c6563692e696f2f7265706f732f37353530313732332f736869656c643f6272616e63683d6d6173746572" alt="StyleCI" data-canonical-src="https://styleci.io/repos/75501723/shield?branch=master" style="max-width:100%;"></a>
-<a href="https://scrutinizer-ci.com/g/tzsk/payu/build-status/master"><img src="https://camo.githubusercontent.com/86d6848c6c317f9e8ff12da299fcfbcd83722578/68747470733a2f2f7363727574696e697a65722d63692e636f6d2f672f747a736b2f706179752f6261646765732f6275696c642e706e673f623d6d6173746572" alt="Build Status" data-canonical-src="https://scrutinizer-ci.com/g/tzsk/payu/badges/build.png?b=master" style="max-width:100%;"></a>
-<a href="https://codeclimate.com/github/tzsk/payu"><img src="https://camo.githubusercontent.com/47d2e3bdbe156716abb647d8eafe7d745d21c8cc/68747470733a2f2f636f6465636c696d6174652e636f6d2f6769746875622f747a736b2f706179752f6261646765732f6770612e737667" alt="Code Climate" data-canonical-src="https://codeclimate.com/github/tzsk/payu/badges/gpa.svg" style="max-width:100%;"></a>
-<a href="https://scrutinizer-ci.com/g/tzsk/payu"><img src="https://camo.githubusercontent.com/58f9e14b429f3c82d0a31737bb8d15dca624cdfe/68747470733a2f2f696d672e736869656c64732e696f2f7363727574696e697a65722f672f747a736b2f706179752e7376673f7374796c653d666c61742d737175617265" alt="Quality Score" data-canonical-src="https://img.shields.io/scrutinizer/g/tzsk/payu.svg?style=flat-square" style="max-width:100%;"></a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="margin-top:100px;">
-                <div class="col-md-10 col-md-offset-1">
-                    <h3>Pull this package through <code>Composer</code>: </h3>
-                    <p>
-                    <strong>
-                        Note: Support for Laravel 5.1 has been REMOVED due to lack of
-                        <code>web</code> Middleware
-                    </strong>
-<pre><code class="language-bash">
-$ composer require tzsk/payu
-
-</code></pre>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="configure" class="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-heading">
-                        <h2>Configure Payu for Use</h2>
-                        <p class="text-muted">After installation configure it to suit your needs!</p>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-
-                    <h3>Add the Service Provider and Facade: </h3>
-                    <p>Go to <code>config/app.php</code> and add the following</p>
-<pre><code class="language-php">
-'providers' => [
-    ...
-    Tzsk\Payu\Provider\PayuServiceProvider::class,
-    ...
-],
-'aliases' => [
-    ...
-    'Payment' => Tzsk\Payu\Facade\Payment::class,
-    ...
-],
-
-</code></pre>
-                    <h3>Once done run <code>Artisan</code> command:</h3>
-<pre><code class="language-bash">
-$ php artisan vendor:publish
-
-</code></pre>
-                    <p>
-                        Now you will have a file <code>config/payu.php</code> &amp; a migration file for <code>payu_payments</code> table<br />
-                        <small>Config file is where you have to put your creadentials. By default test creadentials are set. So you will have no problem testing.</small>
-                    </p>
-
-                    <h3>Migrate Helper Table (Optional):</h3>
-<pre><code class="language-bash">
-$ php artisan migrate
-
-</code></pre>
-                    <p>
-                        After that you will have a <code>payu_payments</code> table in your database. This is just a helper table, no need to change anything.<br /><br />
-                        If you don't want to use the migration table then you can set the <code>'driver' => 'session'</code> in the config file.
-                    </p>
-                </div>
-            </div>
-    </section>
-
-    <section id="usage" class="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-heading">
-                        <h2>How to use Payu</h2>
-                        <p class="text-muted">Follow these simple steps and you are good to go!</p>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-
-                    <h3>Create the Endpoints: </h3>
-                    <p>First off you are going to need 2 endpoints (routes). One for Making the payment call and the other for recieving the payment status.</p>
-                    <h4>For example purposes I will make some assumptions</h4>
-<pre><code class="language-php">
-Route::get('/pay', ['as' => 'pay', 'uses' => 'PaymentController@pay']);
-
-# You will need one more.
-
-Route::get('/payment/status', ['as' => 'payment_status', 'uses' => 'PaymentController@status']);
-
-/**
- * Using Named Routs to demonstrate all the possibilities.
- */
-
-</code></pre>
-                    <h3>Create Controller Methods:</h3>
-                    <p>Use the <code>Payment</code> facade namespace at the top.</p>
-<pre><code class="language-php">
-...
-use Tzsk\Payu\Facade\Payment;
-...
-
-</code></pre>
-<br>
-<p>Make the Payment:</p>
-<pre><code class="language-php">
-public function pay() {
-    /**
-     * These are the minimum required fieldset.
-     */
-     $data = [
-         'txnid' => strtoupper(str_random(8)), # Transaction ID.
-         'amount' => rand(100, 999), # Amount to be charged.
-         'productinfo' => "Product Information",
-         'firstname' => "John", # Payee Name.
-         'email' => "john@doe.com", # Payee Email Address.
-         'phone' => "9876543210", # Payee Phone Number.
-
-         ... # Additional Fields With Data if any.
-         ... # Optional Fields With Data if any.
-     ];
-
-     return Payment::make($data, function ($then) {
-         $then->redirectTo('/payment/status');
-         # OR...
-         $then->redirectRoute('payment_status');
-         # OR...
-         $then->redirectAction('PaymentController@status');
-         /**
-          * Above are general Redirect::to(), Redirect::route() and Redirect::action() Methods.
-          * You can use them as you normally would (With Parameters if you like) in any place to redirect.
-          *
-          * Note: You have to return the Payment Facade.
-          */
-     });
-}
-
-</code></pre>
-<br>
-
-<p>Additional Fields that can go with the <code>$data</code></p>
-<pre><code class="language-php">
-$additional_fields = [
-    "lastname", "address1", "address2", "city", "state", "country", "zipcode"
-];
-
-</code></pre>
-<br>
-
-<p>Optional Fields that can go with the <code>$data</code></p>
-<pre><code class="language-php">
-$optional_fiels = [
-    "udf1", "udf2", "udf3", "udf4", "udf5"
-];
-
-</code></pre>
-<br>
-
-<p>Recieve The Payment:</p>
-<pre><code class="language-php">
-public function status() {
-    $payment = Payment::capture(); # capture the payment after it's done. That's it.
-    /**
-     * $payment is the Model instance of payu_payment row.
-     */
-}
-
-</code></pre>
-<br>
-
-<p>Payment API:</p>
-<pre><code class="language-php">
-$payment->getData(); # Get the full response from Gateway.
-$payment->isCaptured(); # Is the payment captured or some internal failure occured.
-$payment->transaction_id; # Your Local Transaction ID.
-$payment->payment_id; # PayU Payment ID.
-$payment->total_amount; # Get Tototal Amount Deducted.
-$payment->bank_reference_number; # Issued Bank Refernce Number.
-$payment->bank_code; # Issued Bank Code.
-$payment->card_number; # Redacted Card Number. If paid through Card.
-
-$payment->get('attribute'); # Attribute is anything that Payu Post which returns in $payment->getData().
-# Ex.
-$payment->get('udf5');
-# OR...
-$payment->get('zipcode');
-
-...
-# And many more like 'status', 'mode' are found in the Database Table.
-
-</code></pre>
-
-<h3>Advanced Feature:</h3>
-<p>
-    Let's assume you have an <code>Order</code> Model and have a <code>Subscription</code> Model, and you are accepting paymets for both of them.
-    Laravel Payu package makes it a breeze. You can have any number of Models that accept payment.
-    To take advantage of the feature follow the below steps.
-</p>
-<p>In your Models:</p>
-<pre><code class="language-php">
-# Use the Fragment at the top.
-...
-use Tzsk\Payu\Fragment\Payable;
-...
-
-# Then inside the model class use the Fragment (Trait)
-
-class Order extends Model {
-    use Payable;
-    ...
-}
-# That's it. Same applies to Any number of Models that you feel accept payments.
-
-</code></pre>
-<br>
-
-<p>Now Change the <code>Payment::make()</code> slightly</p>
-<pre><code class="language-php">
-# Instead of using Payment::make() directly use:
-return Payment::with($order)->make(function ($then) {
-    ...
-    # Same as previous example.
-});
-
-# The $order variable is a placeholder that represents a perticular row instance of Any Model.
-
-</code></pre>
-<br>
-<p>That's simpley it. Simple isn't it?</p>
-
-<h3>Payment Verify:</h3>
-<p>
-    Cool thing is, you can also verify if a payment is really made or not. If in any case the amount is deducted from the buyer's account
-    but due to network issue it didn't redirect back to your Callback URL. You should check if the Transaction is complete or not.<br><br>
-    I recommend you save your Transaction ID (txnid) with your Order or Subscription (Payable Model) etc.
-</p>
-
-<pre><code class="language-php">
-$response = Payment::verify("Transaction ID")->simple();
-# OR..
-$response = Payment::verify(["Array of Transaction IDs"])->simple();
-
-# 'simple()' stands for Simple Response. You can use 'full()' instead.
-# Ex.
-$response = Payment::verify(...)->full();
-
-</code></pre>
-
-                </div>
-            </div>
-    </section>
-
-    <section id="contact" class="cta">
-        <div class="cta-content">
-            <div class="container">
-                <h2>Love to<br>Get in Touch.</h2>
-                <!-- <a href="#contact" class="btn btn-outline btn-xl page-scroll">Let's Get in Touch!</a> -->
-                <ul class="list-inline list-social" >
-                    <li class="social-twitter">
-                        <a href="https://twitter.com/ZaynTipu" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
-                    </li>
-                    <li class="social-facebook">
-                        <a href="https://facebook.com/ttipu.ahmed" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
-                    </li>
-                    <li class="social-github">
-                        <a href="https://tzsk.github.io" target="_blank"><i class="fa fa-fw fa-github"></i></a>
-                    </li>
-                    <li class="social-email">
-                        <a href="mailto:mailtokmahmed@gmail.com" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="overlay"></div>
-    </section>
-
-    <!-- <section id="contact_details" class="contact bg-primary">
-        <div class="container">
-            <h2>Would <i class="fa fa-heart"></i> to get in touch with you guys!</h2>
-            <ul class="list-inline list-social">
-                <li class="social-twitter">
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li class="social-facebook">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li class="social-google-plus">
-                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                </li>
-            </ul>
-        </div>
-    </section> -->
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2017 Tzsk - Kazi Mainuddin Ahmed. All Rights Reserved.</p>
-            <!-- <ul class="list-inline">
-                <li>
-                    <a href="#">Privacy</a>
-                </li>
-                <li>
-                    <a href="#">Terms</a>
-                </li>
-                <li>
-                    <a href="#">FAQ</a>
-                </li>
-            </ul> -->
-        </div>
-    </footer>
-
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
-    <script type="text/javascript" src="vendor/prism/prism.js"></script>
-    <!-- Theme JavaScript -->
-    <script src="js/new-age.min.js"></script>
-
+  <script src="//unpkg.com/docsify-edit-on-github@1.0.1/index.js"></script>
+  <script>
+    window.$docsify = {
+      name: 'Laravel Payu',
+      nameLink: '/',
+      repo: 'https://github.com/tzsk/payu',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      auto2top: true,
+      notFoundPage: true,
+      plugins: [
+        EditOnGithubPlugin.create(
+          'https://github.com/tzsk/payu/blob/gh-pages/',
+          '',
+          'Help improve the documentation'
+        ),
+      ]
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-php.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
 </body>
-
 </html>
