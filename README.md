@@ -47,6 +47,10 @@ Supported Laravel Versions:
 
 
 ## Important
+
+**Version 2**
+> Version 2 is not backward compatible with version 1. You can see the [Version 1 Documentation here](https://github.com/tzsk/payu/blob/1.2.4/README.md)
+
 **PayuMoney**
 > To use `PayuMoney` you first have to <a href="https://www.payumoney.com/merchant-account/#/" target="_blank">register for a sanbox account</a> and then get the credentials from the <a href="https://www.payumoney.com/merchant-dashboard/#/integration" target="_blank">integration settings</a>.
 
