@@ -7,7 +7,7 @@ Follow the below steps to get started with the PayuBiz & PayuMoney Payment Gatew
 Inside your Project Root folder run the following composer command:
 
 ```bash
-$ composer required tzsk/payu
+$ composer require tzsk/payu
 ```
 
 > **Note:** This package has `Auto Discovery` for **Laravel 5.5 and above** you don't have to include the `Service Provider` & `Alias` to the `config/app.php` file.
