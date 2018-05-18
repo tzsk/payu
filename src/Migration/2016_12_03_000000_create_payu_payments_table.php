@@ -25,8 +25,8 @@ class CreatePayuPaymentsTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->double('amount');
-            $table->double('discount');
-            $table->double('net_amount_debit');
+            $table->double('discount')->default(0);
+            $table->double('net_amount_debit')->default(0);
             $table->text('data');
             $table->string('status');
             $table->string('unmappedstatus');
