@@ -22,7 +22,7 @@ class BizVerifier extends AbstractVerifier
             $response = $this->client->request('POST', $this->url(), [
                 'form_params' => $this->fields()
             ]);
-    
+
             return $this->makeResponse(json_decode($response->getBody()));
         } catch (\Exception $e) {
             return (object) ['status' => false, 'message' => $e->getMessage()];
@@ -42,8 +42,8 @@ class BizVerifier extends AbstractVerifier
      */
     protected function fields()
     {
-        $txn_string = implode("|", $this->txnIds);
-        $hash_str = $this->config->getKey().'|'.$this->command.'|'.$txn_string.'|'.$this->config->getSalt();
+        $txn_string = implode('|', $this->txnIds);
+        $hash_str = $this->config->getKey() . '|' . $this->command . '|' . $txn_string . '|' . $this->config->getSalt();
 
         return [
             'key' => $this->config->getKey(),
@@ -72,7 +72,7 @@ class BizVerifier extends AbstractVerifier
         if ($data->status < 1) {
             return (object) ['status' => false, 'data' => [], 'message' => $data->msg];
         }
-        
+
         $response = ['status' => true, 'data' => [], 'message' => ''];
 
         foreach ($this->txnIds as $id) {

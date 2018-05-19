@@ -15,7 +15,7 @@ class MoneyVerifier extends AbstractVerifier
                     'Authorization' => $this->config->getAuth()
                 ],
             ]);
-    
+
             return $this->makeResponse(json_decode($response->getBody()));
         } catch (\Exception $e) {
             return (object) ['status' => false, 'message' => $e->getMessage()];
@@ -39,7 +39,7 @@ class MoneyVerifier extends AbstractVerifier
     {
         return [
             'merchantKey' => $this->config->getKey(),
-            'merchantTransactionIds' => implode("|", $this->txnIds)
+            'merchantTransactionIds' => implode('|', $this->txnIds)
         ];
     }
 
@@ -59,7 +59,7 @@ class MoneyVerifier extends AbstractVerifier
      */
     protected function makeResponse($data)
     {
-        if (!empty($data->errorCode)) {
+        if (! empty($data->errorCode)) {
             return (object) ['status' => false, 'data' => [], 'message' => $data->message];
         }
         $response = ['status' => true, 'data' => [], 'message' => ''];

@@ -1,11 +1,12 @@
 <?php
+
 namespace Tzsk\Payu\Controllers;
 
-use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Tzsk\Payu\Helpers\FormBuilder;
 use Tzsk\Payu\Helpers\Processor;
+use Illuminate\Routing\Controller;
+use Tzsk\Payu\Helpers\FormBuilder;
+use Illuminate\Support\Facades\Session;
 
 class PaymentController extends Controller
 {

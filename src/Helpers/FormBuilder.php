@@ -69,7 +69,7 @@ class FormBuilder
         $status_url = $this->storage->getStatusUrl();
 
         if (empty($status_url)) {
-            throw new \Exception("There is no Redirect URL specified.");
+            throw new \Exception('There is no Redirect URL specified.');
         }
 
         return urlencode(base64_encode($status_url));
@@ -84,11 +84,13 @@ class FormBuilder
 
         $hash_array = [];
         foreach (collect($fields)->flip()->except(['phone'])->flip() as $field) {
-            $hash_array[] = $this->request->has($field) ? $this->request->get($field) : "";
+            $hash_array[] = $this->request->has($field) ? $this->request->get($field) : '';
         }
 
         $checksum_array = array_merge(
-            [$this->config->getKey()], $hash_array, [$this->config->getSalt()]
+            [$this->config->getKey()],
+            $hash_array,
+            [$this->config->getSalt()]
         );
 
         return hash('sha512', implode('|', $checksum_array));

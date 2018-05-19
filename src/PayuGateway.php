@@ -1,12 +1,13 @@
 <?php
+
 namespace Tzsk\Payu;
 
 use Tzsk\Payu\Helpers\Config;
-use Tzsk\Payu\Helpers\Redirector;
 use Tzsk\Payu\Helpers\Storage;
 use Tzsk\Payu\Model\PayuPayment;
-use Tzsk\Payu\Verifiers\MoneyVerifier;
+use Tzsk\Payu\Helpers\Redirector;
 use Tzsk\Payu\Verifiers\BizVerifier;
+use Tzsk\Payu\Verifiers\MoneyVerifier;
 use Tzsk\Payu\Verifiers\AbstractVerifier;
 
 class PayuGateway
@@ -111,7 +112,7 @@ class PayuGateway
         session()->put('tzsk_payu_data', ['account' => $this->account]);
 
         $transactionId = is_array($transactionId) ?
-            $transactionId : explode("|", $transactionId);
+            $transactionId : explode('|', $transactionId);
 
         return $this->getVerifier($transactionId)->verify();
     }
@@ -128,7 +129,7 @@ class PayuGateway
         if ($config->isPayuMoney()) {
             return new MoneyVerifier($transactionId, $account);
         }
-        
+
         return new BizVerifier($transactionId, $account);
     }
 }

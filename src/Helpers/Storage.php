@@ -1,8 +1,9 @@
 <?php
+
 namespace Tzsk\Payu\Helpers;
 
-use Illuminate\Support\Facades\Session;
 use Tzsk\Payu\Model\PayuPayment;
+use Illuminate\Support\Facades\Session;
 
 class Storage
 {

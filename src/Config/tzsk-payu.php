@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Required Fields.
@@ -24,7 +23,7 @@ return [
         return "udf{$i}";
     }, range(1, 10)),
 
-    'additional_fields' => ["lastname", "address1", "address2", "city", "state", "country", "zipcode"],
+    'additional_fields' => ['lastname', 'address1', 'address2', 'city', 'state', 'country', 'zipcode'],
 
     /*
     |--------------------------------------------------------------------------
@@ -48,5 +47,4 @@ return [
         'surl' => 'tzsk/payment/success',
         'furl' => 'tzsk/payment/failed',
     ]
-
 ];

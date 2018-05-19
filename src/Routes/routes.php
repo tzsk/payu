@@ -4,7 +4,6 @@
  */
 
 Route::group(['namespace' => 'Tzsk\Payu\Controllers', 'middleware' => ['web']], function () {
-
     /**
      * Make the payment request.
      */

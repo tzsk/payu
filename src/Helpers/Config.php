@@ -1,4 +1,5 @@
 <?php
+
 namespace Tzsk\Payu\Helpers;
 
 class Config
@@ -230,7 +231,7 @@ class Config
      */
     public function getPaymentUrl()
     {
-        return 'https://' . $this->prefix() . "." . $this->endpoint;
+        return 'https://' . $this->prefix() . '.' . $this->endpoint;
     }
 
     /**
@@ -241,7 +242,7 @@ class Config
         if ($this->env == 'test' && $this->money) {
             return 'sandboxsecure';
         }
-        
+
         if ($this->env == 'test') {
             return 'test';
         }

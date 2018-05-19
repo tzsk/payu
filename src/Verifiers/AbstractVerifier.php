@@ -3,8 +3,8 @@
 namespace Tzsk\Payu\Verifiers;
 
 use GuzzleHttp\Client;
-use Tzsk\Payu\Helpers\Config;
 use Illuminate\Http\Request;
+use Tzsk\Payu\Helpers\Config;
 use Tzsk\Payu\Helpers\Processor;
 use Tzsk\Payu\Model\PayuPayment;
 

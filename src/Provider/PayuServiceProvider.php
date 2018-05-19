@@ -2,8 +2,8 @@
 
 namespace Tzsk\Payu\Provider;
 
-use Illuminate\Support\ServiceProvider;
 use Tzsk\Payu\PayuGateway;
+use Illuminate\Support\ServiceProvider;
 
 class PayuServiceProvider extends ServiceProvider
 {
@@ -37,7 +37,8 @@ class PayuServiceProvider extends ServiceProvider
          * Merge Configurations.
          */
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/tzsk-payu.php', 'payu'
+            __DIR__ . '/../Config/tzsk-payu.php',
+            'payu'
         );
     }
 
@@ -50,14 +51,14 @@ class PayuServiceProvider extends ServiceProvider
          * Configurations that needs to be done by user.
          */
         $this->publishes([
-            __DIR__.'/../Config/payu.php' => config_path('payu.php'),
+            __DIR__ . '/../Config/payu.php' => config_path('payu.php'),
         ], 'payu-config');
 
         /**
          * Migration file for the payments.
          */
         $this->publishes([
-            __DIR__.'/../Migration/' => database_path('migrations')
+            __DIR__ . '/../Migration/' => database_path('migrations')
         ], 'payu-table');
     }
 
@@ -69,13 +70,13 @@ class PayuServiceProvider extends ServiceProvider
         /**
          * Load routes for payment.
          */
-        if (!$this->app->routesAreCached()) {
-            require __DIR__.'/../Routes/routes.php';
+        if (! $this->app->routesAreCached()) {
+            require __DIR__ . '/../Routes/routes.php';
         }
 
         /**
          * Load the Views.
          */
-        $this->loadViewsFrom(__DIR__.'/../Views', 'tzsk');
+        $this->loadViewsFrom(__DIR__ . '/../Views', 'tzsk');
     }
 }

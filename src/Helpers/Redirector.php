@@ -1,4 +1,5 @@
 <?php
+
 namespace Tzsk\Payu\Helpers;
 
 class Redirector

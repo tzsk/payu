@@ -1,4 +1,5 @@
 <?php
+
 namespace Tzsk\Payu\Facade;
 
 use Illuminate\Support\Facades\Facade;

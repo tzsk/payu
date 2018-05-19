@@ -11,8 +11,8 @@ class Processor
      * Payment statuses.
      */
     const STATUS_COMPLETED = 'Completed';
-    const STATUS_PENDING   = 'Pending';
-    const STATUS_FAILED    = 'Failed';
+    const STATUS_PENDING = 'Pending';
+    const STATUS_FAILED = 'Failed';
 
     /**
      * @var Request
@@ -91,7 +91,7 @@ class Processor
         $attributes['data'] = json_encode($this->request->all());
         $attributes['status'] = $this->getStatus();
         $attributes['account'] = $this->storage->getAccount();
-        
+
         $modelArray = $this->storage->getModel();
         if (! empty($modelArray)) {
             $attributes['payable_id'] = $modelArray['id'];
@@ -109,7 +109,7 @@ class Processor
         $instance = PayuPayment::firstOrNew(['txnid' => $attributes['txnid']]);
         $instance->fill(array_filter($attributes))->save();
 
-        if (!empty($model)) {
+        if (! empty($model)) {
             $instance
             ->fill(['payable_id' => $model['id'], 'payable_type' => $model['class']])
             ->save();
