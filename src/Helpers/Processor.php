@@ -110,9 +110,10 @@ class Processor
         $instance->fill(array_filter($attributes))->save();
 
         if (! empty($model)) {
-            $instance
-            ->fill(['payable_id' => $model['id'], 'payable_type' => $model['class']])
-            ->save();
+            $instance->fill([
+                'payable_id' => $model['id'],
+                'payable_type' => $model['class']
+            ])->save();
         }
 
         return $instance->id;

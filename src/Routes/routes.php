@@ -7,10 +7,16 @@ Route::group(['namespace' => 'Tzsk\Payu\Controllers', 'middleware' => ['web']], 
     /**
      * Make the payment request.
      */
-    Route::get('tzsk/payment', 'PaymentController@index');
+    Route::get(
+        'tzsk/payment',
+        ['as' => 'tzsk.payu.payment', 'uses' => 'PaymentController@index']
+    );
 
     /**
      * Get Response from payment.
      */
-    Route::post('tzsk/payment/{status}', 'PaymentController@payment');
+    Route::post(
+        'tzsk/payment/{status}',
+        ['as' => 'tzsk.payu.payment.status', 'uses' => 'PaymentController@payment']
+    );
 });
