@@ -4,7 +4,7 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![StyleCI](https://styleci.io/repos/75501723/shield?branch=master)](https://styleci.io/repos/75501723)
-[![Build Status](https://scrutinizer-ci.com/g/tzsk/payu/badges/build.png?b=master)](https://scrutinizer-ci.com/g/tzsk/payu/build-status/master)
+[![Build Status][ico-travis]][link-travis]
 [![Code Climate](https://codeclimate.com/github/tzsk/payu/badges/gpa.svg)](https://codeclimate.com/github/tzsk/payu)
 [![Quality Score][ico-code-quality]][link-code-quality]
 
