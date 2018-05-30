@@ -1,5 +1,4 @@
 language: php
 php:
   - '7.1'
-  - hhvm
 before_script: composer install
