@@ -8,4 +8,3 @@
 
 **Email:** <a href="mailto:mailtokmahmed@gmail.com" target="_blank">mailtokmahmed@gmail.com</a>
 
-**Phone:** <a href="tel:+919735340999">+91 9735340999</a>
