@@ -2,6 +2,7 @@
 
 namespace Tzsk\Payu\Tests\Helpers;
 
+use Illuminate\Support\Str;
 use Tzsk\Payu\Tests\TestCase;
 use Tzsk\Payu\Helpers\FormBuilder;
 use Illuminate\Support\Facades\Session;
@@ -46,7 +47,7 @@ class FormBuilderTest extends TestCase
     protected function getTransaction()
     {
         return [
-            'txnid' => strtoupper(str_random(8)),
+            'txnid' => strtoupper(Str::random(8)),
             'amount' => rand(100, 999),
             'productinfo' => 'Product Information',
             'firstname' => 'John',

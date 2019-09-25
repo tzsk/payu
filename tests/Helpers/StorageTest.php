@@ -3,8 +3,8 @@
 namespace Tzsk\Payu\Tests\Helpers;
 
 use Tzsk\Payu\Tests\TestCase;
-use Illuminate\Support\Facades\Session;
 use Tzsk\Payu\Helpers\Storage;
+use Illuminate\Support\Facades\Session;
 
 class StorageTest extends TestCase
 {

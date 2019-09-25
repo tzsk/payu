@@ -2,6 +2,7 @@
 
 namespace Tzsk\Payu\Helpers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -50,7 +51,7 @@ class FormBuilder
         $this->request->replace($this->storage->getData());
 
         $redirect = collect($this->config->getRedirect())->map(function ($value) {
-            $separator = str_contains($value, '?') ? '&' : '?';
+            $separator = Str::contains($value, '?') ? '&' : '?';
             return url($value . $separator . '_token=' . csrf_token() . '&' . 'callback=' . $this->getStatusUrl());
         })->all();
 

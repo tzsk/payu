@@ -4,13 +4,12 @@ namespace Tzsk\Payu\Tests\Helpers;
 
 use Tzsk\Payu\Tests\TestCase;
 use Tzsk\Payu\Helpers\Redirector;
-use Illuminate\Routing\Redirector as BaseRedirector;
 
 class RedirectorTest extends TestCase
 {
     protected $redirector;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

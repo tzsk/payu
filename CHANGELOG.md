@@ -7,6 +7,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## Date - 2018-03-13
 
 ### Added
+- Laravel 6 Support
 - PayuMoney Verification Functionality.
 - Package Autodiscovery.
 

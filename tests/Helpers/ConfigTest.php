@@ -2,8 +2,8 @@
 
 namespace Tzsk\Payu\Tests\Helpers;
 
-use Tzsk\Payu\Tests\TestCase;
 use Tzsk\Payu\Helpers\Config;
+use Tzsk\Payu\Tests\TestCase;
 
 class ConfigTest extends TestCase
 {
