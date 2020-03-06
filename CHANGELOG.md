@@ -4,6 +4,9 @@ All Notable changes to `payu` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## Version - 4.0.0
+- Laravel 7 Support
+
 ## Date - 2018-03-13
 
 ### Added
