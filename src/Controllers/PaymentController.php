@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Session;
 class PaymentController extends Controller
 {
     /**
+     * Temporarily set cross site on
+     */
+    public function __construct()
+    {
+        config(['session.same_site' => null]);
+    }
+
+    /**
      * Got to payment.
      *
      * @param Request $request
