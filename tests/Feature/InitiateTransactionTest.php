@@ -43,14 +43,14 @@ class InitiateTransactionTest extends TestCase
         $response = Payu::initiate($payment)->via('biz')
             ->redirect('http://localhost/transaction/status');
 
-        $this->assertMatchesHtmlSnapshot($response->render());
+        $this->assertMatchesSnapshot($response->render());
 
         /** @var PayuTransaction $transaction */
         $transaction = PayuTransaction::query()
             ->locate('unique-transaction');
-        $this->assertMatchesObjectSnapshot($transaction->body->toArray());
-        $this->assertMatchesObjectSnapshot($transaction->body->params->toArray());
-        $this->assertMatchesObjectSnapshot($transaction->body->payee->toArray());
+        $this->assertMatchesSnapshot($transaction->body->toArray());
+        $this->assertMatchesSnapshot($transaction->body->params->toArray());
+        $this->assertMatchesSnapshot($transaction->body->payee->toArray());
 
         $this->assertEquals('unique-transaction', Session::get('payuTransactionId'));
     }
@@ -81,14 +81,14 @@ class InitiateTransactionTest extends TestCase
             ->via('money')
             ->redirect('http://localhost/money/status');
 
-        $this->assertMatchesHtmlSnapshot($response->render());
+        $this->assertMatchesSnapshot($response->render());
 
         /** @var PayuTransaction $transaction */
         $transaction = PayuTransaction::query()
             ->locate('unique-money-transaction');
-        $this->assertMatchesObjectSnapshot($transaction->body->toArray());
-        $this->assertMatchesObjectSnapshot($transaction->body->params->toArray());
-        $this->assertMatchesObjectSnapshot($transaction->body->payee->toArray());
+        $this->assertMatchesSnapshot($transaction->body->toArray());
+        $this->assertMatchesSnapshot($transaction->body->params->toArray());
+        $this->assertMatchesSnapshot($transaction->body->payee->toArray());
 
         $this->assertEquals('unique-money-transaction', Session::get('payuTransactionId'));
     }
@@ -119,15 +119,15 @@ class InitiateTransactionTest extends TestCase
         $response = Payu::initiate($payment)->via('biz')
             ->redirect('http://localhost/money/status');
 
-        $this->assertMatchesHtmlSnapshot($response->render());
+        $this->assertMatchesSnapshot($response->render());
 
         /** @var PayuTransaction $transaction */
         $transaction = PayuTransaction::query()
             ->locate('unique-morphed-transaction');
-        $this->assertMatchesObjectSnapshot($transaction->body->toArray());
-        $this->assertMatchesObjectSnapshot($transaction->body->params->toArray());
-        $this->assertMatchesObjectSnapshot($transaction->body->payee->toArray());
-        $this->assertMatchesObjectSnapshot($transaction->body->model->toArray());
+        $this->assertMatchesSnapshot($transaction->body->toArray());
+        $this->assertMatchesSnapshot($transaction->body->params->toArray());
+        $this->assertMatchesSnapshot($transaction->body->payee->toArray());
+        $this->assertMatchesSnapshot($transaction->body->model->toArray());
         $this->assertSame($transaction->toArray(), Invoice::fake()->transactions()->first()->toArray());
 
         $this->assertEquals('unique-morphed-transaction', Session::get('payuTransactionId'));
