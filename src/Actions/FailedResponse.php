@@ -19,7 +19,7 @@ class FailedResponse implements Actionable
     {
         $transaction->update([
             'response' => $this->request->all(),
-            'status' => PayuTransaction::STATUS_FAILED,
+            'status'   => PayuTransaction::STATUS_FAILED,
         ]);
 
         event(new TransactionFailed($transaction->fresh()));

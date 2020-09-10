@@ -14,8 +14,10 @@ class Factory
 
     /**
      * @param string $key
-     * @return Gateway
+     *
      * @throws Throwable
+     *
+     * @return Gateway
      */
     public static function make(string $key): Gateway
     {

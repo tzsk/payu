@@ -57,10 +57,10 @@ class PayuMoney extends Gateway
     public function toArray(): array
     {
         return [
-            'key' => $this->key,
-            'salt' => $this->salt,
-            'auth' => $this->auth,
-            'endpoint' => $this->endpoint(),
+            'key'              => $this->key,
+            'salt'             => $this->salt,
+            'auth'             => $this->auth,
+            'endpoint'         => $this->endpoint(),
             'service_provider' => $this->serviceProvider,
         ];
     }
@@ -71,10 +71,10 @@ class PayuMoney extends Gateway
     public function validate(): array
     {
         return Validator::make($this->toArray(), [
-            'key' => 'required|string',
-            'salt' => 'required|string',
-            'auth' => 'required|string',
-            'endpoint' => 'required|url',
+            'key'              => 'required|string',
+            'salt'             => 'required|string',
+            'auth'             => 'required|string',
+            'endpoint'         => 'required|url',
             'service_provider' => 'required|string',
         ])->validate();
     }

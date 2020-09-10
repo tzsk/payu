@@ -8,9 +8,9 @@ trait Verifier
 {
     public function verify($transaction, $data)
     {
-        if (! $data) {
+        if (!$data) {
             $transaction->update([
-                'status' => PayuTransaction::STATUS_FAILED,
+                'status'      => PayuTransaction::STATUS_FAILED,
                 'verified_at' => now(),
             ]);
 
@@ -19,7 +19,7 @@ trait Verifier
 
         $successful = data_get($data, 'status') === 'success';
         $transaction->update([
-            'status' => $successful ? PayuTransaction::STATUS_SUCCESSFUL : PayuTransaction::STATUS_FAILED,
+            'status'      => $successful ? PayuTransaction::STATUS_SUCCESSFUL : PayuTransaction::STATUS_FAILED,
             'verified_at' => now(),
         ]);
     }

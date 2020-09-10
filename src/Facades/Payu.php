@@ -8,6 +8,7 @@ use Tzsk\Payu\Models\PayuTransaction;
 
 /**
  * @see \Tzsk\Payu\Payu
+ *
  * @method static \Tzsk\Payu\Payu initiate(Transaction $payment)
  * @method static PayuTransaction capture()
  */

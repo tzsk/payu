@@ -26,13 +26,13 @@ class TestCase extends Orchestra
     {
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix' => '',
+            'prefix'   => '',
         ]);
 //        $app['config']->set('payu.gateways, ');
 
-        include_once __DIR__ . '/../database/migrations/create_payu_transactions_table.php';
+        include_once __DIR__.'/../database/migrations/create_payu_transactions_table.php';
         (new CreatePayuTransactionsTable())->up();
     }
 }

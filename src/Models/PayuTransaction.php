@@ -13,16 +13,16 @@ use Tzsk\Payu\Gateway\PayuMoney;
 use Tzsk\Payu\Models\Casts\Serialized;
 
 /**
- * Class PayuPayments
- * @package Tzsk\Payu\Models
+ * Class PayuPayments.
  *
- * @property string $transaction_id;
+ * @property string            $transaction_id;
  * @property PayuMoney|PayuBiz $gateway
- * @property Transaction $body
- * @property string $destination
- * @property string $hash
- * @property string $status
- * @property Carbon $verified_at
+ * @property Transaction       $body
+ * @property string            $destination
+ * @property string            $hash
+ * @property string            $status
+ * @property Carbon            $verified_at
+ *
  * @method static Builder verifiable()
  * @method static self locate(string $transaction_id)
  */
@@ -41,8 +41,8 @@ class PayuTransaction extends Model
     ];
 
     protected $casts = [
-        'gateway' => Serialized::class,
-        'body' => Serialized::class,
+        'gateway'  => Serialized::class,
+        'body'     => Serialized::class,
         'response' => 'array',
     ];
 
@@ -121,6 +121,6 @@ class PayuTransaction extends Model
     {
         $value = parent::getAttribute($key);
 
-        return $value ? : data_get(parent::getAttribute('response'), $key);
+        return $value ?: data_get(parent::getAttribute('response'), $key);
     }
 }

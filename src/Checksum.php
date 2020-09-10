@@ -42,7 +42,7 @@ class Checksum
             ->put('salt', $this->salt)
             ->all();
 
-        return hash('sha512', implode("|", $this->getSequence($attributes, $keys->all())));
+        return hash('sha512', implode('|', $this->getSequence($attributes, $keys->all())));
     }
 
     protected function getSequence(array $fields, array $keys): array

@@ -24,8 +24,10 @@ class Payu implements HasFormParams
 
     /**
      * @param string $gateway
-     * @return Payu
+     *
      * @throws Throwable
+     *
+     * @return Payu
      */
     public function via(string $gateway): self
     {
@@ -43,15 +45,17 @@ class Payu implements HasFormParams
 
     /**
      * @param string $url
-     * @return View
+     *
      * @throws Throwable
+     *
+     * @return View
      */
     public function redirect(string $url): View
     {
         Validator::make(compact('url'), ['url' => 'required|url'])->validate();
 
         $this->destination = $url;
-        if (! $this->gateway) {
+        if (!$this->gateway) {
             $this->via($this->defaultGateway());
         }
 
@@ -77,18 +81,18 @@ class Payu implements HasFormParams
             ]);
         $transaction->fill(
             array_merge($this->morphFields(), [
-                'gateway' => $this->gateway,
-                'body' => $this->payment,
+                'gateway'     => $this->gateway,
+                'body'        => $this->payment,
                 'destination' => $this->destination,
-                'hash' => $hash,
+                'hash'        => $hash,
             ])
         )->save();
 
         Session::put('payuTransactionId', $this->payment->transactionId);
 
         return [
-            'endpoint' => $this->gateway->endpoint(),
-            'fields' => array_merge($fields, compact('hash')),
+            'endpoint'    => $this->gateway->endpoint(),
+            'fields'      => array_merge($fields, compact('hash')),
             'transaction' => $transaction,
         ];
     }
@@ -100,12 +104,12 @@ class Payu implements HasFormParams
 
     protected function morphFields()
     {
-        if (! $this->payment->model) {
+        if (!$this->payment->model) {
             return [];
         }
 
         return [
-            'paid_for_id' => $this->payment->model->getKey(),
+            'paid_for_id'   => $this->payment->model->getKey(),
             'paid_for_type' => get_class($this->payment->model),
         ];
     }

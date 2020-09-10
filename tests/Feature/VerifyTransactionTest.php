@@ -21,7 +21,7 @@ class VerifyTransactionTest extends TestCase
 
         Http::fake([
             'test.payu.in/*' => Http::response($payload),
-            '*' => Http::response(''),
+            '*'              => Http::response(''),
         ]);
 
         $this->assertTrue($transaction->pending());
@@ -42,7 +42,7 @@ class VerifyTransactionTest extends TestCase
 
         Http::fake([
             'test.payu.in/*' => Http::response('', 404),
-            '*' => Http::response(''),
+            '*'              => Http::response(''),
         ]);
 
         $this->assertTrue($transaction->pending());
@@ -66,7 +66,7 @@ class VerifyTransactionTest extends TestCase
         $payload = ['result' => [['status' => 'success']]];
         Http::fake([
             'payumoney.com/*' => Http::response($payload),
-            '*' => Http::response(''),
+            '*'               => Http::response(''),
         ]);
 
         $this->assertTrue($transaction->pending());
@@ -89,7 +89,7 @@ class VerifyTransactionTest extends TestCase
 
         Http::fake([
             'payumoney.com/*' => Http::response([], 404),
-            '*' => Http::response(''),
+            '*'               => Http::response(''),
         ]);
 
         $this->assertTrue($transaction->pending());

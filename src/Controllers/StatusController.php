@@ -26,7 +26,7 @@ class StatusController
     {
         $actions = [
             PayuTransaction::STATUS_SUCCESSFUL => new SuccessResponse($request),
-            PayuTransaction::STATUS_FAILED => new FailedResponse($request),
+            PayuTransaction::STATUS_FAILED     => new FailedResponse($request),
         ];
 
         $callable = data_get($actions, $request->input('urlType'));
@@ -37,13 +37,13 @@ class StatusController
 
     protected function checkValidation(Request $request)
     {
-        if (! $request->hasValidSignature()) {
+        if (!$request->hasValidSignature()) {
             abort(403);
         }
 
         $request->validate([
             'transaction' => 'required|string',
-            'hash' => 'required|string',
+            'hash'        => 'required|string',
         ]);
     }
 }
