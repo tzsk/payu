@@ -1,30 +1,77 @@
-# PayU Laravel Payment Gateway
+# PayU Payment Gateway
 
-[![Software License][ico-license]](LICENSE.md)
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![StyleCI](https://styleci.io/repos/75501723/shield?branch=master)](https://styleci.io/repos/75501723)
-[![Build Status][ico-travis]][link-travis]
-[![Code Climate](https://codeclimate.com/github/tzsk/payu/badges/gpa.svg)](https://codeclimate.com/github/tzsk/payu)
-[![Quality Score][ico-code-quality]][link-code-quality]
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/payu.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzs/payu)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tzsk/payu/run-tests?label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/payu/actions?query=workflow%3Arun-tests+branch%3A5.x)
+[![Total Downloads](https://img.shields.io/packagist/dt/tzsk/payu.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/payu)
 
-<div style="display:block;text-align:center;">
-<img src='https://i.imgur.com/4AypOy2.png' />
-</div>
+This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
-### Version 3 is here
+## Installation
 
-This is a Package for `PayU India` payment gateway integration with Laravel, Now payment gateway made simple.
+You can install the package via composer:
 
-### <a href="https://tzsk.github.io/payu" target="_blank">Read the full documentation</a>
+```bash
+composer require tzsk/payu
+```
 
-## Change log
+You can publish and run the migrations with:
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+```bash
+php artisan payu:publish --migration
+php artisan migrate
+```
+
+You can publish the config file with:
+```bash
+php artisan payu:publish --config
+```
+
+This is the contents of the published config file:
+
+```php
+return [
+];
+```
+
+## Usage
+
+``` php
+use Tzsk\Payu\Concerns\Attributes;
+use Tzsk\Payu\Concerns\Customer;
+use Tzsk\Payu\Concerns\Transaction;
+use Tzsk\Payu\Facades\Payu;
+
+$customer = Customer::make()
+    ->firstName('John Doe')
+    ->email('john@example.com');
+
+$attributes = Attributes::make()
+    ->udf1('Anything');
+
+$transaction = Transaction::make()
+    ->charge(1000)
+    ->for('iPhone') // Product Name...
+    ->with($attributes) // Optional...
+    ->to($customer);
+
+return Payu::via('money') // Optional...
+    ->initiate($transaction)
+    ->redirect(route('result'));
+```
+
+## Testing
+
+``` bash
+composer test
+```
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Security
 
@@ -32,24 +79,9 @@ If you discover any security related issues, please email mailtokmahmed@gmail.co
 
 ## Credits
 
-- [Kazi Mainuddin Ahmed][link-author]
-- [All Contributors][link-contributors]
+- [Kazi Ahmed](https://github.com/tzsk)
+- [All Contributors](../../contributors)
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/tzsk/payu.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/tzsk/payu/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/tzsk/payu.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/tzsk/payu.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/tzsk/payu.svg?style=flat-square
-
-[link-packagist]: https://packagist.org/packages/tzsk/payu
-[link-travis]: https://travis-ci.org/tzsk/payu
-[link-scrutinizer]: https://scrutinizer-ci.com/g/tzsk/payu/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/tzsk/payu
-[link-downloads]: https://packagist.org/packages/tzsk/payu
-[link-author]: https://github.com/tzsk
-[link-contributors]: ../../contributors

@@ -1,0 +1,3 @@
+txnid: unique-morphed-transaction
+amount: !!float 100
+productinfo: Product
