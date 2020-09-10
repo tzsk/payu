@@ -1,7 +1,7 @@
 # PayU Payment Gateway
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/payu.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzs/payu)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tzsk/payu/run-tests?label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/payu/actions?query=workflow%3Arun-tests+branch%3A5.x)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tzsk/payu/Tests?label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/payu/actions?query=workflow%3ATests+branch%3A5.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/tzsk/payu.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/payu)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
