@@ -97,15 +97,15 @@ class Attributes implements HasFormParams
     public function toArray(): array
     {
         return [
-            'udf1'  => $this->udf1,
-            'udf2'  => $this->udf2,
-            'udf3'  => $this->udf3,
-            'udf4'  => $this->udf4,
-            'udf5'  => $this->udf5,
-            'udf6'  => $this->udf6,
-            'udf7'  => $this->udf7,
-            'udf8'  => $this->udf8,
-            'udf9'  => $this->udf9,
+            'udf1' => $this->udf1,
+            'udf2' => $this->udf2,
+            'udf3' => $this->udf3,
+            'udf4' => $this->udf4,
+            'udf5' => $this->udf5,
+            'udf6' => $this->udf6,
+            'udf7' => $this->udf7,
+            'udf8' => $this->udf8,
+            'udf9' => $this->udf9,
             'udf10' => $this->udf10,
         ];
     }
@@ -116,15 +116,15 @@ class Attributes implements HasFormParams
     public function validate(): array
     {
         return Validator::make($this->toArray(), [
-            'udf1'  => 'nullable|string',
-            'udf2'  => 'nullable|string',
-            'udf3'  => 'nullable|string',
-            'udf4'  => 'nullable|string',
-            'udf5'  => 'nullable|string',
-            'udf6'  => 'nullable|string',
-            'udf7'  => 'nullable|string',
-            'udf8'  => 'nullable|string',
-            'udf9'  => 'nullable|string',
+            'udf1' => 'nullable|string',
+            'udf2' => 'nullable|string',
+            'udf3' => 'nullable|string',
+            'udf4' => 'nullable|string',
+            'udf5' => 'nullable|string',
+            'udf6' => 'nullable|string',
+            'udf7' => 'nullable|string',
+            'udf8' => 'nullable|string',
+            'udf9' => 'nullable|string',
             'udf10' => 'nullable|string',
         ])->validate();
     }

@@ -21,7 +21,7 @@ class VerifyPayuMoney implements Actionable
 
     public function handle(PayuTransaction $transaction)
     {
-        if (!$transaction->shouldVerify()) {
+        if (! $transaction->shouldVerify()) {
             return false;
         }
 
@@ -54,7 +54,7 @@ class VerifyPayuMoney implements Actionable
     protected function getQuery(): string
     {
         return http_build_query([
-            'merchantKey'            => $this->gateway->key,
+            'merchantKey' => $this->gateway->key,
             'merchantTransactionIds' => $this->transactionId,
         ]);
     }

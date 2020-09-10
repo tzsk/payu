@@ -54,8 +54,8 @@ class PayuBiz extends Gateway
     public function toArray(): array
     {
         return [
-            'key'      => $this->key,
-            'salt'     => $this->salt,
+            'key' => $this->key,
+            'salt' => $this->salt,
             'endpoint' => $this->endpoint(),
         ];
     }
@@ -66,8 +66,8 @@ class PayuBiz extends Gateway
     public function validate(): array
     {
         return Validator::make($this->toArray(), [
-            'key'      => 'required|string',
-            'salt'     => 'required|string',
+            'key' => 'required|string',
+            'salt' => 'required|string',
             'endpoint' => 'required|url',
         ])->validate();
     }

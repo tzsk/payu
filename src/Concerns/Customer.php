@@ -98,15 +98,15 @@ class Customer implements HasFormParams
     {
         return [
             'firstname' => $this->firstName,
-            'lastname'  => $this->lastName,
-            'email'     => $this->email,
-            'phone'     => $this->phone,
-            'address1'  => $this->addressOne,
-            'address2'  => $this->addressTwo,
-            'city'      => $this->city,
-            'state'     => $this->state,
-            'country'   => $this->country,
-            'zipcode'   => $this->zipCode,
+            'lastname' => $this->lastName,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'address1' => $this->addressOne,
+            'address2' => $this->addressTwo,
+            'city' => $this->city,
+            'state' => $this->state,
+            'country' => $this->country,
+            'zipcode' => $this->zipCode,
         ];
     }
 
@@ -117,15 +117,15 @@ class Customer implements HasFormParams
     {
         return Validator::make($this->toArray(), [
             'firstname' => 'required|string',
-            'lastname'  => 'nullable|string',
-            'email'     => 'required|email',
-            'phone'     => 'nullable|string',
-            'address1'  => 'nullable|string',
-            'address2'  => 'nullable|string',
-            'city'      => 'nullable|string',
-            'state'     => 'nullable|string',
-            'country'   => 'nullable|string',
-            'zipcode'   => 'nullable|string',
+            'lastname' => 'nullable|string',
+            'email' => 'required|email',
+            'phone' => 'nullable|string',
+            'address1' => 'nullable|string',
+            'address2' => 'nullable|string',
+            'city' => 'nullable|string',
+            'state' => 'nullable|string',
+            'country' => 'nullable|string',
+            'zipcode' => 'nullable|string',
         ])->validate();
     }
 

@@ -24,7 +24,7 @@ class SuccessResponse implements Actionable
 
         $transaction->update([
             'response' => $this->request->all(),
-            'status'   => $valid ? PayuTransaction::STATUS_SUCCESSFUL : PayuTransaction::STATUS_INVALID,
+            'status' => $valid ? PayuTransaction::STATUS_SUCCESSFUL : PayuTransaction::STATUS_INVALID,
         ]);
 
         $fresh = $transaction->fresh();

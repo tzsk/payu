@@ -67,8 +67,8 @@ class Transaction implements HasFormParams
     public function toArray(): array
     {
         return [
-            'txnid'       => $this->transactionId,
-            'amount'      => $this->amount,
+            'txnid' => $this->transactionId,
+            'amount' => $this->amount,
             'productinfo' => $this->productInfo,
         ];
     }
@@ -79,8 +79,8 @@ class Transaction implements HasFormParams
     public function validate(): array
     {
         return Validator::make($this->toArray(), [
-            'txnid'       => 'required|string',
-            'amount'      => 'required|numeric',
+            'txnid' => 'required|string',
+            'amount' => 'required|numeric',
             'productinfo' => 'required|string',
         ])->validate();
     }

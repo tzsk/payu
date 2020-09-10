@@ -41,8 +41,8 @@ class PayuTransaction extends Model
     ];
 
     protected $casts = [
-        'gateway'  => Serialized::class,
-        'body'     => Serialized::class,
+        'gateway' => Serialized::class,
+        'body' => Serialized::class,
         'response' => 'array',
     ];
 

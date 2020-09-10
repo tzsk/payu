@@ -25,7 +25,7 @@ class PayuServiceProvider extends ServiceProvider
             $migrationFileName = 'create_payu_transactions_table.php';
             $source = __DIR__."/../database/migrations/{$migrationFileName}";
 
-            if (!$this->migrationFileExists($migrationFileName)) {
+            if (! $this->migrationFileExists($migrationFileName)) {
                 $destination = database_path('migrations/'.date('Y_m_d_His', time()).'_'.$migrationFileName);
                 $this->publishes([$source => $destination], 'payu-migration');
             }

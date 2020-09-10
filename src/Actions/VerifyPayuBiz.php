@@ -21,7 +21,7 @@ class VerifyPayuBiz implements Actionable
 
     public function handle(PayuTransaction $transaction): bool
     {
-        if (!$transaction->shouldVerify()) {
+        if (! $transaction->shouldVerify()) {
             return false;
         }
         $this->initialize($transaction);
@@ -54,7 +54,7 @@ class VerifyPayuBiz implements Actionable
     {
         $command = 'verify_payment';
         $values = array_merge($this->gateway->toArray(), [
-            'id'      => $this->transactionId,
+            'id' => $this->transactionId,
             'command' => $command,
         ]);
         $sequence = collect(['key', 'command', 'id', 'salt'])
@@ -62,9 +62,9 @@ class VerifyPayuBiz implements Actionable
             ->join('|');
 
         return [
-            'key'     => $this->gateway->key,
-            'hash'    => hash('sha512', $sequence),
-            'var1'    => $this->transactionId,
+            'key' => $this->gateway->key,
+            'hash' => hash('sha512', $sequence),
+            'var1' => $this->transactionId,
             'command' => $command,
         ];
     }

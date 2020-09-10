@@ -27,8 +27,8 @@ class GatewayResponse
 
         return array_merge([
             'mihpayid' => $this->faker->randomNumber(6),
-            'status'   => $status,
-            'hash'     => $hash,
+            'status' => $status,
+            'hash' => $hash,
         ], $this->fields);
     }
 

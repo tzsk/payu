@@ -27,10 +27,10 @@ $factory->define(PayuTransaction::class, function (Generator $faker) {
 
     return [
         'transaction_id' => $transaction->transactionId,
-        'gateway'        => $gateway,
-        'destination'    => $faker->url,
-        'body'           => $transaction,
-        'hash'           => Checksum::with($gateway->salt())->create($transaction->toArray()),
-        'status'         => PayuTransaction::STATUS_PENDING,
+        'gateway' => $gateway,
+        'destination' => $faker->url,
+        'body' => $transaction,
+        'hash' => Checksum::with($gateway->salt())->create($transaction->toArray()),
+        'status' => PayuTransaction::STATUS_PENDING,
     ];
 });
