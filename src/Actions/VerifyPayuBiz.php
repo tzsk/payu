@@ -37,7 +37,7 @@ class VerifyPayuBiz implements Actionable
     protected function initialize(PayuTransaction $transaction)
     {
         $this->gateway = $transaction->gateway;
-        $this->transactionId = $transaction->transaction_id;
+        $this->transactionId = data_get($transaction, 'transaction_id');
     }
 
     protected function url(): string
