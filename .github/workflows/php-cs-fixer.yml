@@ -11,6 +11,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run PHP CS Fixer
         uses: docker://oskarstark/php-cs-fixer-ga
@@ -20,4 +21,4 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Fix styling
+          commit_message: Apply php-cs Fixes
