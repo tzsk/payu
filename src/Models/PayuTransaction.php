@@ -120,6 +120,6 @@ class PayuTransaction extends Model
 
     public function response($key)
     {
-        return data_get($this->response, $key);
+        return data_get($this->getAttribute('response'), $key);
     }
 }
