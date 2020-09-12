@@ -22,8 +22,6 @@ class VerifyTransaction implements ShouldQueue
 
     public function handle()
     {
-        $gateway = $this->transaction->gateway;
-
-        $gateway->verifier()->handle($this->transaction);
+        $this->transaction->verify();
     }
 }
