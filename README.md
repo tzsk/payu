@@ -1,63 +1,17 @@
 # PayU Payment Gateway
 
+![GitHub License](https://img.shields.io/github/license/tzsk/payu?style=for-the-badge)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/payu.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzs/payu)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tzsk/payu/Tests?label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/payu/actions?query=workflow%3ATests+branch%3A5.x)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tzsk/payu/Tests?label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/payu/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/tzsk/payu.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/payu)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+## Official Documentation
 
-## Installation
+Documentation of Laravel PayU can be found on [Laravel PayU website](https://payu.tzskr.com).
 
-You can install the package via composer:
+## Legacy <= 4.x Documentation
 
-```bash
-composer require tzsk/payu
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan payu:publish --migration
-php artisan migrate
-```
-
-You can publish the config file with:
-```bash
-php artisan payu:publish --config
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-## Usage
-
-``` php
-use Tzsk\Payu\Concerns\Attributes;
-use Tzsk\Payu\Concerns\Customer;
-use Tzsk\Payu\Concerns\Transaction;
-use Tzsk\Payu\Facades\Payu;
-
-$customer = Customer::make()
-    ->firstName('John Doe')
-    ->email('john@example.com');
-
-$attributes = Attributes::make()
-    ->udf1('Anything');
-
-$transaction = Transaction::make()
-    ->charge(1000)
-    ->for('iPhone') // Product Name...
-    ->with($attributes) // Optional...
-    ->to($customer);
-
-return Payu::via('money') // Optional...
-    ->initiate($transaction)
-    ->redirect(route('result'));
-```
+You can be find it in [Legacy documentation website](https://tzsk.github.io/payu) 
 
 ## Testing
 
