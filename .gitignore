@@ -1,2 +1,11 @@
-vendor/
+build
+composer.lock
+docs
+vendor
+coverage
+/node_modules
 .phpunit.result.cache
+.idea
+.php_cs.cache
+.DS_Store
+.idea

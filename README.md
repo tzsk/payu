@@ -1,30 +1,31 @@
-# PayU Laravel Payment Gateway
+# PayU Payment Gateway
 
-[![Software License][ico-license]](LICENSE.md)
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![StyleCI](https://styleci.io/repos/75501723/shield?branch=master)](https://styleci.io/repos/75501723)
-[![Build Status][ico-travis]][link-travis]
-[![Code Climate](https://codeclimate.com/github/tzsk/payu/badges/gpa.svg)](https://codeclimate.com/github/tzsk/payu)
-[![Quality Score][ico-code-quality]][link-code-quality]
+![GitHub License](https://img.shields.io/github/license/tzsk/payu?style=for-the-badge)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/payu.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzs/payu)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tzsk/payu/Tests?label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/payu/actions?query=workflow%3ATests+branch%3Amaster)
+[![Total Downloads](https://img.shields.io/packagist/dt/tzsk/payu.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/payu)
 
-<div style="display:block;text-align:center;">
-<img src='https://i.imgur.com/4AypOy2.png' />
-</div>
+## Official Documentation
 
-### Version 3 is here
+Documentation of Laravel PayU can be found on [Laravel PayU website](https://payu.tzskr.com).
 
-This is a Package for `PayU India` payment gateway integration with Laravel, Now payment gateway made simple.
+## Legacy <= 4.x Documentation
 
-### <a href="https://tzsk.github.io/payu" target="_blank">Read the full documentation</a>
+You can be find it in [Legacy documentation website](https://tzsk.github.io/payu) 
 
-## Change log
+## Testing
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+``` bash
+composer test
+```
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Security
 
@@ -32,24 +33,9 @@ If you discover any security related issues, please email mailtokmahmed@gmail.co
 
 ## Credits
 
-- [Kazi Mainuddin Ahmed][link-author]
-- [All Contributors][link-contributors]
+- [Kazi Ahmed](https://github.com/tzsk)
+- [All Contributors](../../contributors)
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/tzsk/payu.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/tzsk/payu/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/tzsk/payu.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/tzsk/payu.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/tzsk/payu.svg?style=flat-square
-
-[link-packagist]: https://packagist.org/packages/tzsk/payu
-[link-travis]: https://travis-ci.org/tzsk/payu
-[link-scrutinizer]: https://scrutinizer-ci.com/g/tzsk/payu/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/tzsk/payu
-[link-downloads]: https://packagist.org/packages/tzsk/payu
-[link-author]: https://github.com/tzsk
-[link-contributors]: ../../contributors

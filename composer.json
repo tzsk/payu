@@ -1,7 +1,6 @@
 {
     "name": "tzsk/payu",
-    "type": "library",
-    "description": "PayU India Payment Gateway Integration for Laravel.",
+    "description": "PayU India Payment Gateway Integration with Laravel",
     "keywords": [
         "tzsk",
         "payu",
@@ -19,20 +18,25 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Kazi Mainuddin Ahmed",
+            "name": "tzsk",
             "email": "mailtokmahmed@gmail.com",
-            "homepage": "https://github.com/tzsk",
+            "homepage": "https://tzsk.githu.io",
             "role": "Developer"
         }
     ],
     "require": {
-        "php" : "^7.2",
-        "illuminate/support": "~5.7|~5.8|^6.0|^7.0",
-        "guzzlehttp/guzzle": "~6.2"
+        "php": "^7.4",
+        "laravel/framework": "^7.0|^8.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.7|~3.8|^4.0|^5.0",
-        "phpunit/phpunit": "^8.0"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "guzzlehttp/guzzle": "^7.0",
+        "laravel/legacy-factories": "^1.0",
+        "orchestra/testbench": "^5.0|^6.0",
+        "phpunit/phpunit": "^9.3",
+        "psalm/plugin-laravel": "^1.2",
+        "spatie/phpunit-snapshot-assertions": "^4.0",
+        "vimeo/psalm": "^3.11"
     },
     "autoload": {
         "psr-4": {
@@ -45,22 +49,24 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Tzsk\\Payu\\Provider\\PayuServiceProvider"
+                "Tzsk\\Payu\\PayuServiceProvider"
             ],
             "aliases": {
-                "Payment": "Tzsk\\Payu\\Facade\\Payment"
+                "Payu": "Tzsk\\Payu\\Facades\\Payu"
             }
-        },
-        "branch-alias": {
-            "dev-master": "1.0-dev"
         }
     },
-    "config": {
-        "sort-packages": true
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
