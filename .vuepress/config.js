@@ -26,6 +26,7 @@ module.exports = {
         repo: 'tzsk/payu',
 
         docsRepo: 'tzsk/payu',
+        docsBranch: 'docs',
         editLinks: true,
         editLinkText: 'Help improve this page!',
 
