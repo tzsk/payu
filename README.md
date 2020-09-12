@@ -1,11 +1,14 @@
 # :gift: PayU Payment Gateway
 
 ![Payu Package](resources/images/payment.svg)
+<center>
 
 ![GitHub License](https://img.shields.io/github/license/tzsk/payu?style=for-the-badge)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tzsk/payu.svg?style=for-the-badge&logo=composer)](https://packagist.org/packages/tzs/payu)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/tzsk/payu/Tests?label=tests&style=for-the-badge&logo=github)](https://github.com/tzsk/payu/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/tzsk/payu.svg?style=for-the-badge&logo=laravel)](https://packagist.org/packages/tzsk/payu)
+
+</center>
 
 ## :package: Official Documentation
 
