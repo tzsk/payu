@@ -111,7 +111,7 @@ class PayuTransaction extends Model
 
     public function verified()
     {
-        return !empty($this->verified_at);
+        return ! empty($this->verified_at);
     }
 
     public function shouldVerify()
