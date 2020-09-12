@@ -1,0 +1,11 @@
+{
+    "dependencies": {
+        "vuepress": "^1.5"
+    },
+    "scripts": {
+        "start": "npm run docs:dev",
+        "docs:build": "vuepress build",
+        "docs:dev": "vuepress dev"
+    },
+    "devDependencies": {}
+}
