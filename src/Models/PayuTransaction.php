@@ -125,7 +125,7 @@ class PayuTransaction extends Model
         return $allowedStatus && $notChecked;
     }
 
-    public function verify(): self
+    public function verify(): ?self
     {
         /** @var Gateway $gateway */
         $gateway = $this->getAttribute('gateway');

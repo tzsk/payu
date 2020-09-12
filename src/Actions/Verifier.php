@@ -18,6 +18,6 @@ trait Verifier
 
         $event = $successful ? TransactionSuccessful::class : TransactionFailed::class;
 
-        event(new $event($transaction));
+        event(new $event($transaction->fresh()));
     }
 }
