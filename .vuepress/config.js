@@ -37,4 +37,14 @@ module.exports = {
             '/5.x/': require('./5.x')
         },
     },
+
+    plugins: [
+        [
+            '@vuepress/pwa',
+            {
+                serviceWorker: true,
+                updatePopup: true
+            }
+        ]
+    ],
 }
