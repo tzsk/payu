@@ -25,6 +25,7 @@ use Tzsk\Payu\Models\Casts\Serialized;
  * @property Carbon $verified_at
  * @method static Builder verifiable()
  * @method static self locate(string $transaction_id)
+ * @method string response(string $key)
  */
 class PayuTransaction extends Model
 {
@@ -117,10 +118,8 @@ class PayuTransaction extends Model
         return $allowedStatus && $notChecked;
     }
 
-    public function getAttribute($key)
+    public function response($key)
     {
-        $value = parent::getAttribute($key);
-
-        return $value ? : data_get(parent::getAttribute('response'), $key);
+        return data_get($this->response, $key);
     }
 }
