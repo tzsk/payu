@@ -106,7 +106,7 @@ class Payu implements HasFormParams
 
         return [
             'paid_for_id' => $this->payment->model->getKey(),
-            'paid_for_type' => get_class($this->payment->model),
+            'paid_for_type' => $this->payment->model->getMorphClass(),
         ];
     }
 
