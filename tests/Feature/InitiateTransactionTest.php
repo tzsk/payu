@@ -3,12 +3,14 @@
 namespace Tzsk\Payu\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Spatie\Snapshots\MatchesSnapshots;
 use Tzsk\Payu\Concerns\Attributes;
 use Tzsk\Payu\Concerns\Customer;
 use Tzsk\Payu\Concerns\Transaction;
+use Tzsk\Payu\Events\TransactionInitiated;
 use Tzsk\Payu\Facades\Payu;
 use Tzsk\Payu\Models\PayuTransaction;
 use Tzsk\Payu\Tests\Invoice;
@@ -21,6 +23,7 @@ class InitiateTransactionTest extends TestCase
     /** @test */
     public function can_create_payu_response()
     {
+        Event::fake();
         URL::shouldReceive('route')
             ->andReturn('http://localhost/foo-status');
         URL::shouldReceive('temporarySignedRoute')
@@ -53,11 +56,13 @@ class InitiateTransactionTest extends TestCase
         $this->assertMatchesSnapshot($transaction->body->payee->toArray());
 
         $this->assertEquals('unique-transaction', Session::get('payuTransactionId'));
+        Event::assertDispatched(TransactionInitiated::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
     /** @test  */
     public function can_create_payu_money_payments_response()
     {
+        Event::fake();
         URL::shouldReceive('route')
             ->andReturn('http://localhost/foo-status');
         URL::shouldReceive('temporarySignedRoute')
@@ -91,11 +96,13 @@ class InitiateTransactionTest extends TestCase
         $this->assertMatchesSnapshot($transaction->body->payee->toArray());
 
         $this->assertEquals('unique-money-transaction', Session::get('payuTransactionId'));
+        Event::assertDispatched(TransactionInitiated::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
     /** @test  */
     public function can_create_payu_morphed_payments_response()
     {
+        Event::fake();
         URL::shouldReceive('route')
             ->andReturn('http://localhost/morphed-status');
         URL::shouldReceive('temporarySignedRoute')
@@ -131,5 +138,6 @@ class InitiateTransactionTest extends TestCase
         $this->assertSame($transaction->toArray(), Invoice::fake()->transactions()->first()->toArray());
 
         $this->assertEquals('unique-morphed-transaction', Session::get('payuTransactionId'));
+        Event::assertDispatched(TransactionInitiated::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 }

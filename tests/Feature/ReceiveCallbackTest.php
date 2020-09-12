@@ -3,8 +3,12 @@
 namespace Tzsk\Payu\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use Tzsk\Payu\Events\TransactionFailed;
+use Tzsk\Payu\Events\TransactionInvalidated;
+use Tzsk\Payu\Events\TransactionSuccessful;
 use Tzsk\Payu\Facades\Payu;
 use Tzsk\Payu\Models\PayuTransaction;
 use Tzsk\Payu\Tests\GatewayResponse;
@@ -28,6 +32,7 @@ class ReceiveCallbackTest extends TestCase
     /** @test */
     public function it_can_receive_success_post_back_from_payu()
     {
+        Event::fake();
         /** @var PayuTransaction $transaction */
         $transaction = factory(PayuTransaction::class)->create();
         $body = new GatewayResponse($transaction);
@@ -44,11 +49,13 @@ class ReceiveCallbackTest extends TestCase
         $fresh = $transaction->fresh();
         $this->assertFalse($fresh->pending());
         $this->assertTrue($fresh->successful());
+        Event::assertDispatched(TransactionSuccessful::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
     /** @test */
     public function it_can_receive_failure_post_back_from_payu()
     {
+        Event::fake();
         /** @var PayuTransaction $transaction */
         $transaction = factory(PayuTransaction::class)->create();
         $body = new GatewayResponse($transaction);
@@ -65,11 +72,13 @@ class ReceiveCallbackTest extends TestCase
         $fresh = $transaction->fresh();
         $this->assertFalse($fresh->pending());
         $this->assertTrue($fresh->failed());
+        Event::assertDispatched(TransactionFailed::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
     /** @test */
     public function it_can_receive_invalid_post_back_from_payu()
     {
+        Event::fake();
         /** @var PayuTransaction $transaction */
         $transaction = factory(PayuTransaction::class)->create();
         $body = new GatewayResponse($transaction);
@@ -86,6 +95,7 @@ class ReceiveCallbackTest extends TestCase
         $fresh = $transaction->fresh();
         $this->assertFalse($fresh->pending());
         $this->assertTrue($fresh->invalid());
+        Event::assertDispatched(TransactionInvalidated::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
     protected function getUrl(PayuTransaction $transaction, string $status)

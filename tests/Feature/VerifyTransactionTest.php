@@ -2,7 +2,10 @@
 
 namespace Tzsk\Payu\Tests\Feature;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
+use Tzsk\Payu\Events\TransactionFailed;
+use Tzsk\Payu\Events\TransactionSuccessful;
 use Tzsk\Payu\Gateway\Factory;
 use Tzsk\Payu\Models\PayuTransaction;
 use Tzsk\Payu\Tests\TestCase;
@@ -12,6 +15,7 @@ class VerifyTransactionTest extends TestCase
     /** @test */
     public function can_verify_biz_transactions()
     {
+        Event::fake();
         /** @var PayuTransaction $transaction */
         $transaction = factory(PayuTransaction::class)->create();
 
@@ -32,11 +36,13 @@ class VerifyTransactionTest extends TestCase
         $fresh = $transaction->fresh();
         $this->assertFalse($fresh->pending());
         $this->assertTrue($fresh->successful());
+        Event::assertDispatched(TransactionSuccessful::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
     /** @test */
     public function can_verify_not_found_biz_transactions()
     {
+        Event::fake();
         /** @var PayuTransaction $transaction */
         $transaction = factory(PayuTransaction::class)->create();
 
@@ -53,11 +59,13 @@ class VerifyTransactionTest extends TestCase
         $fresh = $transaction->fresh();
         $this->assertFalse($fresh->pending());
         $this->assertTrue($fresh->failed());
+        Event::assertDispatched(TransactionFailed::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
     /** @test */
     public function can_verify_money_transactions()
     {
+        Event::fake();
         /** @var PayuTransaction $transaction */
         $transaction = factory(PayuTransaction::class)->create([
             'gateway' => Factory::make('money'),
@@ -77,11 +85,13 @@ class VerifyTransactionTest extends TestCase
         $fresh = $transaction->fresh();
         $this->assertFalse($fresh->pending());
         $this->assertTrue($fresh->successful());
+        Event::assertDispatched(TransactionSuccessful::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
     /** @test */
     public function can_verify_not_found_money_transactions()
     {
+        Event::fake();
         /** @var PayuTransaction $transaction */
         $transaction = factory(PayuTransaction::class)->create([
             'gateway' => Factory::make('money'),
@@ -100,5 +110,6 @@ class VerifyTransactionTest extends TestCase
         $fresh = $transaction->fresh();
         $this->assertFalse($fresh->pending());
         $this->assertTrue($fresh->failed());
+        Event::assertDispatched(TransactionFailed::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 }
