@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Tzsk\Payu\Concerns\Transaction;
+use Tzsk\Payu\Gateway\Gateway;
 use Tzsk\Payu\Gateway\PayuBiz;
 use Tzsk\Payu\Gateway\PayuMoney;
+use Tzsk\Payu\Jobs\VerifyTransaction;
 use Tzsk\Payu\Models\Casts\Serialized;
 
 /**
@@ -107,6 +109,11 @@ class PayuTransaction extends Model
         return $this->status == self::STATUS_INVALID;
     }
 
+    public function verified()
+    {
+        return !empty($this->verified_at);
+    }
+
     public function shouldVerify()
     {
         $allowedStatus = in_array($this->status, [
@@ -116,6 +123,20 @@ class PayuTransaction extends Model
         $notChecked = empty($this->verified_at);
 
         return $allowedStatus && $notChecked;
+    }
+
+    public function verify(): self
+    {
+        /** @var Gateway $gateway */
+        $gateway = $this->getAttribute('gateway');
+        $gateway->verifier()->handle($this);
+
+        return $this->fresh();
+    }
+
+    public function verifyAsync()
+    {
+        VerifyTransaction::dispatch($this);
     }
 
     public function response($key)
