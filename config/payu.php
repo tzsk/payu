@@ -3,6 +3,7 @@
 use Tzsk\Payu\Gateway\Gateway;
 use Tzsk\Payu\Gateway\PayuBiz;
 use Tzsk\Payu\Gateway\PayuMoney;
+use Tzsk\Payu\Models\PayuTransaction;
 
 return [
     'default' => env('PAYU_DEFAULT_GATEWAY', 'biz'),
@@ -20,5 +21,9 @@ return [
             'key' => env('PAYU_BIZ_KEY', 'gtKFFx'),
             'salt' => env('PAYU_BIZ_SALT', 'eCwWELxi'),
         ]),
+    ],
+
+    'verify' => [
+        PayuTransaction::STATUS_PENDING,
     ],
 ];

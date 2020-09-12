@@ -75,10 +75,7 @@ class PayuTransaction extends Model
 
     public function scopeVerifiable(Builder $builder): Builder
     {
-        return $builder->whereIn('status', [
-            PayuTransaction::STATUS_PENDING,
-            PayuTransaction::STATUS_FAILED,
-        ])->whereNull('verified_at');
+        return $builder->whereIn('status', config('payu.verify', []))->whereNull('verified_at');
     }
 
     public function scopeLocate(Builder $builder, string $id): ?self
@@ -116,10 +113,7 @@ class PayuTransaction extends Model
 
     public function shouldVerify()
     {
-        $allowedStatus = in_array($this->status, [
-            PayuTransaction::STATUS_PENDING,
-            PayuTransaction::STATUS_FAILED,
-        ]);
+        $allowedStatus = in_array($this->status, config('payu.verify', []));
         $notChecked = empty($this->verified_at);
 
         return $allowedStatus && $notChecked;
