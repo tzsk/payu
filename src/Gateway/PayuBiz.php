@@ -78,4 +78,9 @@ class PayuBiz extends Gateway
             ->except(['endpoint', 'salt'])
             ->all();
     }
+
+    public static function __set_state(array $config)
+    {
+        return new self($config);
+    }
 }

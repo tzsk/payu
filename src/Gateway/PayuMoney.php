@@ -85,4 +85,9 @@ class PayuMoney extends Gateway
             ->except(['auth', 'endpoint', 'salt'])
             ->all();
     }
+
+    public static function __set_state(array $config)
+    {
+        return new self($config);
+    }
 }
