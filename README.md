@@ -1,6 +1,7 @@
 # :gift: PayU Payment Gateway
 
 ![Payu Package](resources/images/payment.svg)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftzsk%2Fpayu.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftzsk%2Fpayu?ref=badge_shield)
 <center>
 
 ![GitHub License](https://img.shields.io/github/license/tzsk/payu?style=for-the-badge)
@@ -44,3 +45,6 @@ If you discover any security related issues, please email mailtokmahmed@gmail.co
 ## :policeman: License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftzsk%2Fpayu.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftzsk%2Fpayu?ref=badge_large)
