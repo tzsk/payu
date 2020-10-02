@@ -1,8 +1,10 @@
 # Laravel Payu
 
+## Warning: This is a document for the old version go to the [new documentation site](https://payu.tzskr.com)
+
 > Laravel Package for PayuBiz & Payu Money payment gateway. Payment Gateway for your Laravel Application Made Easy.
 
-<p>
+<p class="badges">
 <a href="https://github.com/tzsk/payu/blob/master/LICENSE.md"><img src="https://camo.githubusercontent.com/f8dc8b0dba0c01c69878a1b06bf2167d2bf9a5dd/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d627269676874677265656e2e7376673f7374796c653d666c61742d737175617265" alt="Software License" data-canonical-src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" style="max-width:100%;"></a>
 
 <a href="https://packagist.org/packages/tzsk/payu" rel="nofollow"><img src="https://camo.githubusercontent.com/173be062e07298482685fc6d1eb38833f7e09d59/68747470733a2f2f696d672e736869656c64732e696f2f7061636b61676973742f762f747a736b2f706179752e7376673f7374796c653d666c61742d737175617265" alt="Latest Version on Packagist" data-canonical-src="https://img.shields.io/packagist/v/tzsk/payu.svg?style=flat-square" style="max-width:100%;"></a>
@@ -17,21 +19,6 @@
 
 <a href="https://scrutinizer-ci.com/g/tzsk/payu" rel="nofollow"><img src="https://camo.githubusercontent.com/58f9e14b429f3c82d0a31737bb8d15dca624cdfe/68747470733a2f2f696d672e736869656c64732e696f2f7363727574696e697a65722f672f747a736b2f706179752e7376673f7374796c653d666c61742d737175617265" alt="Quality Score" data-canonical-src="https://img.shields.io/scrutinizer/g/tzsk/payu.svg?style=flat-square" style="max-width:100%;"></a>
 </p>
-
-<div class="donation-box">
-<a href="https://www.instamojo.com/@tzsk/lfa056dbfb11846e0a96efcbf228df32a/" target="_blank" class="donate">
-    :beer: Buy me a Beer
-</a>
-
-<a href="https://www.instamojo.com/@tzsk/l57cade9c71924cf7bd61a24aebe904cc/" target="_blank" class="donate">
-    :coffee: Buy me a Coffee
-</a>
-
-<a href="https://www.instamojo.com/@tzsk/lfcd271c5db59480ab1d5e2f9750debc7/" target="_blank" class="donate">
-    :chocolate_bar: Buy me a Chocolate
-</a>
-<!-- <div class="clear"></div> -->
-</div>
 
 ## Compatibility
 
