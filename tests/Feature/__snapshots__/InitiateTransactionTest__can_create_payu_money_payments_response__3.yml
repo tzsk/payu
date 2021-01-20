@@ -1,10 +1,10 @@
-udf1: money
-udf2: null
-udf3: null
-udf4: null
-udf5: null
-udf6: null
-udf7: null
-udf8: null
-udf9: null
-udf10: null
+firstname: 'John Doe Money'
+lastname: null
+email: john.money@example.com
+phone: null
+address1: null
+address2: null
+city: null
+state: null
+country: null
+zipcode: null

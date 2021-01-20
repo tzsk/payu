@@ -1,3 +1,10 @@
-txnid: unique-morphed-transaction
-amount: !!float 100
-productinfo: Product
+udf1: morphed
+udf2: null
+udf3: null
+udf4: null
+udf5: null
+udf6: null
+udf7: null
+udf8: null
+udf9: null
+udf10: null

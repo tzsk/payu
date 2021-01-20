@@ -46,7 +46,7 @@ class InitiateTransactionTest extends TestCase
         $response = Payu::initiate($payment)->via('biz')
             ->redirect('http://localhost/transaction/status');
 
-        $this->assertMatchesSnapshot($response->render());
+        $this->assertEquals('payu::form', $response->name());
 
         /** @var PayuTransaction $transaction */
         $transaction = PayuTransaction::query()
@@ -86,7 +86,7 @@ class InitiateTransactionTest extends TestCase
             ->via('money')
             ->redirect('http://localhost/money/status');
 
-        $this->assertMatchesSnapshot($response->render());
+        $this->assertEquals('payu::form', $response->name());
 
         /** @var PayuTransaction $transaction */
         $transaction = PayuTransaction::query()
@@ -126,7 +126,7 @@ class InitiateTransactionTest extends TestCase
         $response = Payu::initiate($payment)->via('biz')
             ->redirect('http://localhost/money/status');
 
-        $this->assertMatchesSnapshot($response->render());
+        $this->assertEquals('payu::form', $response->name());
 
         /** @var PayuTransaction $transaction */
         $transaction = PayuTransaction::query()
