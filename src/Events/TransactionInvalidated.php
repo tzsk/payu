@@ -9,7 +9,9 @@ use Tzsk\Payu\Models\PayuTransaction;
 
 class TransactionInvalidated
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public PayuTransaction $transaction;
 
