@@ -18,7 +18,8 @@ use Tzsk\Payu\Tests\TestCase;
 
 class InitiateTransactionTest extends TestCase
 {
-    use RefreshDatabase, MatchesSnapshots;
+    use RefreshDatabase;
+    use MatchesSnapshots;
 
     /** @test */
     public function can_create_payu_response()
