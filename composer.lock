@@ -8927,16 +8927,16 @@
         },
         {
             "name": "spatie/phpunit-snapshot-assertions",
-            "version": "4.2.6",
+            "version": "4.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/phpunit-snapshot-assertions.git",
-                "reference": "811d4edee3e62618e037d75ed33d2b7fb5191aad"
+                "reference": "981fa0e0a432315064db00b6b97a4f11f3b0c0fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/811d4edee3e62618e037d75ed33d2b7fb5191aad",
-                "reference": "811d4edee3e62618e037d75ed33d2b7fb5191aad",
+                "url": "https://api.github.com/repos/spatie/phpunit-snapshot-assertions/zipball/981fa0e0a432315064db00b6b97a4f11f3b0c0fd",
+                "reference": "981fa0e0a432315064db00b6b97a4f11f3b0c0fd",
                 "shasum": ""
             },
             "require": {
@@ -8981,7 +8981,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/phpunit-snapshot-assertions/issues",
-                "source": "https://github.com/spatie/phpunit-snapshot-assertions/tree/4.2.6"
+                "source": "https://github.com/spatie/phpunit-snapshot-assertions/tree/4.2.7"
             },
             "funding": [
                 {
@@ -8989,7 +8989,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-04-20T07:53:05+00:00"
+            "time": "2021-07-09T08:38:04+00:00"
         },
         {
             "name": "spatie/ray",
