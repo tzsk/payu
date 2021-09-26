@@ -130,7 +130,7 @@ class Customer implements HasFormParams
                 'zipcode' => 'nullable|string',
             ])->validate();
         } catch (ValidationException $e) {
-            throw new InvalidValueException($e->validator->errors()->first());
+            throw InvalidValueException::fromValidationException($e);
         }
     }
 

@@ -43,7 +43,7 @@ class VerifyPayuBiz implements Actionable
     protected function url(): string
     {
         $subdomain = data_get($this->domainMap, $this->gateway->mode);
-        throw_unless($subdomain, new InvalidValueException(__('Invalid mode supplied for PayuBiz')));
+        throw_unless($subdomain, InvalidValueException::fromMessage(__('Invalid mode supplied for PayuBiz'), 'mode'));
 
         return sprintf('https://%s.payu.in/merchant/postservice?form=2', $subdomain);
     }

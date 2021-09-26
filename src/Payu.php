@@ -51,7 +51,7 @@ class Payu implements HasFormParams
         try {
             Validator::make(compact('url'), ['url' => 'required|url'])->validate();
         } catch (ValidationException $e) {
-            throw new InvalidValueException($e->validator->errors()->first());
+            throw InvalidValueException::fromValidationException($e);
         }
 
         $this->destination = $url;
@@ -149,7 +149,7 @@ class Payu implements HasFormParams
                 'furl' => 'required|url',
             ])->validate();
         } catch (ValidationException $e) {
-            throw new InvalidValueException($e->validator->errors()->first());
+            throw InvalidValueException::fromValidationException($e);
         }
     }
 
