@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Tzsk\Payu\Contracts\HasFormParams;
+use Tzsk\Payu\Exceptions\InvalidValueException;
 
 class Transaction implements HasFormParams
 {
@@ -74,15 +75,19 @@ class Transaction implements HasFormParams
     }
 
     /**
-     * @throws ValidationException
+     * @throws InvalidValueException
      */
     public function validate(): array
     {
-        return Validator::make($this->toArray(), [
-            'txnid' => 'required|string',
-            'amount' => 'required|numeric',
-            'productinfo' => 'required|string',
-        ])->validate();
+        try {
+            return Validator::make($this->toArray(), [
+                'txnid' => 'required|string',
+                'amount' => 'required|numeric',
+                'productinfo' => 'required|string',
+            ])->validate();
+        } catch (ValidationException $e) {
+            throw new InvalidValueException($e->validator->errors()->first());
+        }
     }
 
     public function fields(): array

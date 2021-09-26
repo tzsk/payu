@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Tzsk\Payu\Actions\Actionable;
 use Tzsk\Payu\Actions\VerifyPayuBiz;
+use Tzsk\Payu\Exceptions\InvalidValueException;
 
 class PayuBiz extends Gateway
 {
@@ -34,9 +35,7 @@ class PayuBiz extends Gateway
     public function endpoint(): ?string
     {
         $url = data_get($this->processUrls, $this->mode);
-        throw_unless($url, ValidationException::withMessages([
-            'mode' => __('Invalid mode supplied for PayuBiz'),
-        ]));
+        throw_unless($url, new InvalidValueException(__('Invalid mode supplied for PayuBiz')));
 
         return sprintf($url, $this->base);
     }
@@ -61,15 +60,19 @@ class PayuBiz extends Gateway
     }
 
     /**
-     * @throws ValidationException
+     * @throws InvalidValueException
      */
     public function validate(): array
     {
-        return Validator::make($this->toArray(), [
-            'key' => 'required|string',
-            'salt' => 'required|string',
-            'endpoint' => 'required|url',
-        ])->validate();
+        try {
+            return Validator::make($this->toArray(), [
+                'key' => 'required|string',
+                'salt' => 'required|string',
+                'endpoint' => 'required|url',
+            ])->validate();
+        } catch (ValidationException $e) {
+            throw new InvalidValueException($e->validator->errors()->first());
+        }
     }
 
     public function fields(): array

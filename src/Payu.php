@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
-use Throwable;
 use Tzsk\Payu\Components\Form;
 use Tzsk\Payu\Concerns\Transaction;
 use Tzsk\Payu\Contracts\HasFormParams;
 use Tzsk\Payu\Events\TransactionInitiated;
+use Tzsk\Payu\Exceptions\InvalidValueException;
 use Tzsk\Payu\Gateway\Factory;
 use Tzsk\Payu\Gateway\Gateway;
 use Tzsk\Payu\Models\PayuTransaction;
@@ -25,7 +25,7 @@ class Payu implements HasFormParams
     /**
      * @param string $gateway
      * @return Payu
-     * @throws Throwable
+     * @throws InvalidValueException
      */
     public function via(string $gateway): self
     {
@@ -44,11 +44,15 @@ class Payu implements HasFormParams
     /**
      * @param string $url
      * @return View
-     * @throws Throwable
+     * @throws InvalidValueException
      */
     public function redirect(string $url): View
     {
-        Validator::make(compact('url'), ['url' => 'required|url'])->validate();
+        try {
+            Validator::make(compact('url'), ['url' => 'required|url'])->validate();
+        } catch (ValidationException $e) {
+            throw new InvalidValueException($e->validator->errors()->first());
+        }
 
         $this->destination = $url;
         if (! $this->gateway) {
@@ -63,7 +67,7 @@ class Payu implements HasFormParams
     }
 
     /**
-     * @throws ValidationException
+     * @throws InvalidValueException
      */
     protected function prepare()
     {
@@ -72,17 +76,15 @@ class Payu implements HasFormParams
         $hash = $this->getHash();
 
         $transaction = PayuTransaction::query()
-            ->firstOrNew([
-                'transaction_id' => $this->payment->transactionId,
-            ]);
-        $transaction->fill(
-            array_merge($this->morphFields(), [
-                'gateway' => $this->gateway,
-                'body' => $this->payment,
-                'destination' => $this->destination,
-                'hash' => $hash,
-            ])
-        )->save();
+            ->firstOrNew(['transaction_id' => $this->payment->transactionId]);
+
+        $attr = array_merge($this->morphFields(), [
+            'gateway' => $this->gateway,
+            'body' => $this->payment,
+            'destination' => $this->destination,
+            'hash' => $hash,
+        ]);
+        $transaction->fill($attr)->save();
 
         Session::put('payuTransactionId', $this->payment->transactionId);
 
@@ -132,7 +134,7 @@ class Payu implements HasFormParams
     }
 
     /**
-     * @throws ValidationException
+     * @throws InvalidValueException
      */
     public function validate(): array
     {
@@ -141,10 +143,14 @@ class Payu implements HasFormParams
         $this->payment->params->validate();
         $this->payment->validate();
 
-        return Validator::make($this->toArray(), [
-            'surl' => 'required|url',
-            'furl' => 'required|url',
-        ])->validate();
+        try {
+            return Validator::make($this->toArray(), [
+                'surl' => 'required|url',
+                'furl' => 'required|url',
+            ])->validate();
+        } catch (ValidationException $e) {
+            throw new InvalidValueException($e->validator->errors()->first());
+        }
     }
 
     public function getSignedRoute(string $urlType): string
