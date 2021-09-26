@@ -21,8 +21,8 @@ class Factory
         $factory = new self();
         $gateway = data_get($factory->gateways(), $key);
 
-        throw_unless($gateway, new InvalidValueException(__(sprintf('Gateway [%s] does not exist', $key))));
-        throw_unless($gateway instanceof Gateway, new InvalidValueException(__(sprintf('Invalid gateway [%s]', $key))));
+        throw_unless($gateway, InvalidValueException::fromMessage(__(sprintf('Gateway [%s] does not exist', $key)), $key));
+        throw_unless($gateway instanceof Gateway, InvalidValueException::fromMessage(__(sprintf('Invalid gateway [%s]', $key)), $key));
 
         return $gateway;
     }

@@ -130,7 +130,7 @@ class Attributes implements HasFormParams
                 'udf10' => 'nullable|string',
             ])->validate();
         } catch (ValidationException $e) {
-            throw new InvalidValueException($e->validator->errors()->first());
+            throw InvalidValueException::fromValidationException($e);
         }
     }
 

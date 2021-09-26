@@ -38,7 +38,7 @@ class PayuMoney extends Gateway
     public function endpoint(): ?string
     {
         $url = data_get($this->processUrls, $this->mode);
-        throw_unless($url, new InvalidValueException(__('Invalid mode supplied for PayuMoney')));
+        throw_unless($url, InvalidValueException::fromMessage(__('Invalid mode supplied for PayuMoney'), 'mode'));
 
         return sprintf($url, $this->base);
     }
@@ -78,7 +78,7 @@ class PayuMoney extends Gateway
                 'service_provider' => 'required|string',
             ])->validate();
         } catch (ValidationException $e) {
-            throw new InvalidValueException($e->validator->errors()->first());
+            throw InvalidValueException::fromValidationException($e);
         }
     }
 
