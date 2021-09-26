@@ -35,7 +35,7 @@ class PayuBiz extends Gateway
     public function endpoint(): ?string
     {
         $url = data_get($this->processUrls, $this->mode);
-        throw_unless($url, new InvalidValueException(__('Invalid mode supplied for PayuBiz')));
+        throw_unless($url, InvalidValueException::fromMessage(__('Invalid mode supplied for PayuBiz'), 'mode'));
 
         return sprintf($url, $this->base);
     }
@@ -71,7 +71,7 @@ class PayuBiz extends Gateway
                 'endpoint' => 'required|url',
             ])->validate();
         } catch (ValidationException $e) {
-            throw new InvalidValueException($e->validator->errors()->first());
+            throw InvalidValueException::fromValidationException($e);
         }
     }
 

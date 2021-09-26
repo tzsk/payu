@@ -86,7 +86,7 @@ class Transaction implements HasFormParams
                 'productinfo' => 'required|string',
             ])->validate();
         } catch (ValidationException $e) {
-            throw new InvalidValueException($e->validator->errors()->first());
+            throw InvalidValueException::fromValidationException($e);
         }
     }
 

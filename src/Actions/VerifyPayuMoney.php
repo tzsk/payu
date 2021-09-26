@@ -44,7 +44,7 @@ class VerifyPayuMoney implements Actionable
     protected function url(): string
     {
         $part = data_get($this->partMap, $this->gateway->mode);
-        throw_unless($part, new InvalidValueException(__('Invalid mode supplied for PayuBiz')));
+        throw_unless($part, InvalidValueException::fromMessage(__('Invalid mode supplied for PayuBiz'), 'mode'));
 
         return sprintf('https://www.payumoney.com/%spayment/op/getPaymentResponse?%s', $part, $this->getQuery());
     }
