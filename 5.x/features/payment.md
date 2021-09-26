@@ -16,13 +16,14 @@ $customer = Customer::make()
     ->firstName('John Doe')
     ->email('john@example.com');
 
+// This is entirely optional custom attributes
 $attributes = Attributes::make()
     ->udf1('anything');
 
 $transaction = Transaction::make()
     ->charge(100)
     ->for('Product')
-    ->with($attributes)
+    ->with($attributes) // Only when using any custom attributes
     ->to($customer);
 
 return Payu::initiate($transaction)->redirect(route('status'));
