@@ -5,6 +5,7 @@ namespace Tzsk\Payu\Concerns;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Tzsk\Payu\Contracts\HasFormParams;
+use Tzsk\Payu\Exceptions\InvalidValueException;
 
 class Attributes implements HasFormParams
 {
@@ -111,22 +112,26 @@ class Attributes implements HasFormParams
     }
 
     /**
-     * @throws ValidationException
+     * @throws InvalidValueException
      */
     public function validate(): array
     {
-        return Validator::make($this->toArray(), [
-            'udf1' => 'nullable|string',
-            'udf2' => 'nullable|string',
-            'udf3' => 'nullable|string',
-            'udf4' => 'nullable|string',
-            'udf5' => 'nullable|string',
-            'udf6' => 'nullable|string',
-            'udf7' => 'nullable|string',
-            'udf8' => 'nullable|string',
-            'udf9' => 'nullable|string',
-            'udf10' => 'nullable|string',
-        ])->validate();
+        try {
+            return Validator::make($this->toArray(), [
+                'udf1' => 'nullable|string',
+                'udf2' => 'nullable|string',
+                'udf3' => 'nullable|string',
+                'udf4' => 'nullable|string',
+                'udf5' => 'nullable|string',
+                'udf6' => 'nullable|string',
+                'udf7' => 'nullable|string',
+                'udf8' => 'nullable|string',
+                'udf9' => 'nullable|string',
+                'udf10' => 'nullable|string',
+            ])->validate();
+        } catch (ValidationException $e) {
+            throw new InvalidValueException($e->validator->errors()->first());
+        }
     }
 
     public function fields(): array
