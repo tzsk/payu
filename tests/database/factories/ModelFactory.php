@@ -8,7 +8,7 @@ use Tzsk\Payu\Concerns\Transaction;
 use Tzsk\Payu\Gateway\Factory;
 use Tzsk\Payu\Models\PayuTransaction;
 
-/* @var Illuminate\Database\Eloquent\Factory $factory */
+/** @var Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(PayuTransaction::class, function (Generator $faker) {
     $customer = Customer::make()
         ->firstName($faker->firstName)
