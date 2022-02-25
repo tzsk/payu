@@ -18,6 +18,11 @@ class Transaction implements HasFormParams
     public ?Attributes $params;
     public ?Model $model = null;
 
+    public function __construct()
+    {
+        $this->params = new Attributes();
+    }
+
     public static function make(?string $transactionId = null): self
     {
         return (new self())->id($transactionId ?? Str::random(10));
