@@ -60,6 +60,40 @@ class InitiateTransactionTest extends TestCase
         Event::assertDispatched(TransactionInitiated::class, fn ($event) => $event->transaction instanceof PayuTransaction);
     }
 
+    /** @test */
+    public function can_create_payu_response_without_attributes()
+    {
+        Event::fake();
+        URL::shouldReceive('route')
+            ->andReturn('http://localhost/foo-status');
+        URL::shouldReceive('temporarySignedRoute')
+            ->andReturn(route('payu::redirect'));
+
+        $payee = Customer::make()
+            ->firstName('John Doe')
+            ->email('john@example.com');
+
+        $payment = Transaction::make()
+            ->id('unique-transaction')
+            ->charge(100)
+            ->for('Product')
+            ->to($payee);
+
+        $response = Payu::initiate($payment)->via('biz')
+            ->redirect('http://localhost/transaction/status');
+
+        $this->assertEquals('payu::form', $response->name());
+
+        /** @var PayuTransaction $transaction */
+        $transaction = PayuTransaction::query()
+            ->locate('unique-transaction');
+        $this->assertMatchesSnapshot($transaction->body->toArray());
+        $this->assertMatchesSnapshot($transaction->body->payee->toArray());
+
+        $this->assertEquals('unique-transaction', Session::get('payuTransactionId'));
+        Event::assertDispatched(TransactionInitiated::class, fn ($event) => $event->transaction instanceof PayuTransaction);
+    }
+
     /** @test  */
     public function can_create_payu_money_payments_response()
     {
