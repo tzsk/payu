@@ -16,7 +16,6 @@ use Tzsk\Payu\Models\Casts\Serialized;
 
 /**
  * Class PayuPayments
- * @package Tzsk\Payu\Models
  *
  * @property string $transaction_id;
  * @property PayuMoney|PayuBiz $gateway
@@ -25,6 +24,7 @@ use Tzsk\Payu\Models\Casts\Serialized;
  * @property string $hash
  * @property string $status
  * @property Carbon $verified_at
+ *
  * @method static Builder verifiable()
  * @method static self locate(string $transaction_id)
  * @method string response(string $key)
@@ -34,8 +34,11 @@ class PayuTransaction extends Model
     use SoftDeletes;
 
     const STATUS_PENDING = 'pending';
+
     const STATUS_FAILED = 'failed';
+
     const STATUS_SUCCESSFUL = 'successful';
+
     const STATUS_INVALID = 'invalid';
 
     protected $fillable = [

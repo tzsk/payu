@@ -8,6 +8,7 @@ use Tzsk\Payu\Contracts\HasFormParams;
 abstract class Gateway implements HasFormParams
 {
     const TEST_MODE = 'test';
+
     const LIVE_MODE = 'live';
 
     public string $mode;

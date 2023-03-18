@@ -11,6 +11,7 @@ class GatewayResponse
     use WithFaker;
 
     public PayuTransaction $transaction;
+
     public array $fields;
 
     public function __construct(PayuTransaction $transaction)

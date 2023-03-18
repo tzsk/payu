@@ -1,6 +1,6 @@
 <?php
 
-use \Faker\Generator;
+use Faker\Generator;
 use Tzsk\Payu\Checksum;
 use Tzsk\Payu\Concerns\Attributes;
 use Tzsk\Payu\Concerns\Customer;

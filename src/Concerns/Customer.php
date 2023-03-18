@@ -10,14 +10,23 @@ use Tzsk\Payu\Exceptions\InvalidValueException;
 class Customer implements HasFormParams
 {
     public ?string $firstName = null;
+
     public ?string $lastName = null;
+
     public ?string $email = null;
+
     public ?string $phone = null;
+
     public ?string $addressOne = null;
+
     public ?string $addressTwo = null;
+
     public ?string $city = null;
+
     public ?string $state = null;
+
     public ?string $country = null;
+
     public ?string $zipCode = null;
 
     public static function make(): self

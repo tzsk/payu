@@ -11,9 +11,13 @@ use Tzsk\Payu\Exceptions\InvalidValueException;
 class PayuMoney extends Gateway
 {
     public ?string $key;
+
     public ?string $salt;
+
     public ?string $auth;
+
     public ?string $base;
+
     public string $serviceProvider = 'payu_paisa';
 
     protected array $processUrls = [
