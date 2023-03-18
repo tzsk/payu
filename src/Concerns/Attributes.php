@@ -10,14 +10,23 @@ use Tzsk\Payu\Exceptions\InvalidValueException;
 class Attributes implements HasFormParams
 {
     public ?string $udf1 = null;
+
     public ?string $udf2 = null;
+
     public ?string $udf3 = null;
+
     public ?string $udf4 = null;
+
     public ?string $udf5 = null;
+
     public ?string $udf6 = null;
+
     public ?string $udf7 = null;
+
     public ?string $udf8 = null;
+
     public ?string $udf9 = null;
+
     public ?string $udf10 = null;
 
     public static function make()

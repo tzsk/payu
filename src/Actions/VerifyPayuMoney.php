@@ -13,7 +13,9 @@ class VerifyPayuMoney implements Actionable
     use Verifier;
 
     protected PayuMoney $gateway;
+
     protected string $transactionId;
+
     protected array $partMap = [
         Gateway::TEST_MODE => 'sandbox/',
         Gateway::LIVE_MODE => '',

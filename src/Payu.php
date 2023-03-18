@@ -19,12 +19,12 @@ use Tzsk\Payu\Models\PayuTransaction;
 class Payu implements HasFormParams
 {
     protected ?string $destination = null;
+
     protected ?Gateway $gateway = null;
+
     protected ?Transaction $payment = null;
 
     /**
-     * @param string $gateway
-     * @return Payu
      * @throws InvalidValueException
      */
     public function via(string $gateway): self
@@ -42,8 +42,6 @@ class Payu implements HasFormParams
     }
 
     /**
-     * @param string $url
-     * @return View
      * @throws InvalidValueException
      */
     public function redirect(string $url): View

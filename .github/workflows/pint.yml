@@ -1,13 +1,16 @@
-name: PHPStan
+name: Check & fix styling
 
 on: [push, pull_request]
 
 jobs:
-  psalm:
-    name: phpstan
+  php-cs-fixer:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -24,5 +27,10 @@ jobs:
       - name: Run composer install
         run: composer install -n --prefer-dist
 
-      - name: Run phpstan
-        run: ./vendor/bin/phpstan analyse --level 1 database routes src tests
+      - name: Run Pint
+        run: ./vendor/bin/pint
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply php-cs Fixes

@@ -12,10 +12,15 @@ use Tzsk\Payu\Exceptions\InvalidValueException;
 class Transaction implements HasFormParams
 {
     public ?string $transactionId = null;
+
     public ?float $amount = null;
+
     public ?string $productInfo = null;
+
     public ?Customer $payee;
+
     public ?Attributes $params;
+
     public ?Model $model = null;
 
     public function __construct()

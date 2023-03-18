@@ -15,18 +15,18 @@ class PayuServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/payu.php' => config_path('payu.php'),
+                __DIR__.'/../config/payu.php' => config_path('payu.php'),
             ], 'payu-config');
 
             $this->publishes([
-                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/payu'),
+                __DIR__.'/../resources/views' => base_path('resources/views/vendor/payu'),
             ], 'payu-template');
 
             $migrationFileName = 'create_payu_transactions_table.php';
-            $source = __DIR__ . "/../database/migrations/{$migrationFileName}";
+            $source = __DIR__."/../database/migrations/{$migrationFileName}";
 
             if (! $this->migrationFileExists($migrationFileName)) {
-                $destination = database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $migrationFileName);
+                $destination = database_path('migrations/'.date('Y_m_d_His', time()).'_'.$migrationFileName);
                 $this->publishes([$source => $destination], 'payu-migration');
             }
 
@@ -36,8 +36,8 @@ class PayuServiceProvider extends ServiceProvider
             ]);
         }
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'payu');
-        $this->loadRoutesFrom(__DIR__ . '/../routes/payu.php');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'payu');
+        $this->loadRoutesFrom(__DIR__.'/../routes/payu.php');
         $this->callAfterResolving(BladeCompiler::class, function () {
             Blade::component(Form::class, 'payu-form');
         });
@@ -49,13 +49,13 @@ class PayuServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/payu.php', 'payu');
+        $this->mergeConfigFrom(__DIR__.'/../config/payu.php', 'payu');
     }
 
     public static function migrationFileExists(string $migrationFileName): bool
     {
         $len = strlen($migrationFileName);
-        foreach (glob(database_path("migrations/*.php")) as $filename) {
+        foreach (glob(database_path('migrations/*.php')) as $filename) {
             if ((substr($filename, -$len) === $migrationFileName)) {
                 return true;
             }

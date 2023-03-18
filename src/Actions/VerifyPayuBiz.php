@@ -13,7 +13,9 @@ class VerifyPayuBiz implements Actionable
     use Verifier;
 
     protected PayuBiz $gateway;
+
     protected string $transactionId;
+
     protected array $domainMap = [
         Gateway::TEST_MODE => 'test',
         Gateway::LIVE_MODE => 'info',
