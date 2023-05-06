@@ -30,7 +30,6 @@ class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
-//        $app['config']->set('payu.gateways, ');
 
         include_once __DIR__.'/../database/migrations/create_payu_transactions_table.php';
         (new CreatePayuTransactionsTable())->up();
